@@ -1451,6 +1451,7 @@ footer .clogo{filter:invert(1) brightness(.25)}
   playFilm();
   // the access code is asked every time the site is opened
   try{ sessionStorage.removeItem('mi-ok'); }catch(e){}
+  const ok = false;
   document.getElementById('gateForm').addEventListener('submit', async e => {
     e.preventDefault();
     const v = document.getElementById('code').value.trim().toUpperCase();
