@@ -49,7 +49,7 @@ img{display:block;max-width:100%}
 #gate .poster{background:url(img/opening.webp) center/cover}
 #gate .veil{position:absolute;inset:0;background:radial-gradient(70% 60% at 50% 45%,rgba(27,19,11,.15),rgba(27,19,11,.75))}
 #gate .box{position:relative;z-index:1;width:min(560px,100%)}
-#gate .logo{width:min(560px,82vw);margin:0 auto;animation:reveal 2.6s .3s cubic-bezier(.2,.65,.2,1) both}
+#gate .logo{width:min(420px,74vw);margin:0 auto;animation:reveal 2.6s .3s cubic-bezier(.2,.65,.2,1) both}
 #gate .tag{font-size:clamp(10px,1.1vw,13px);letter-spacing:.42em;color:#c8a777;margin-top:26px;text-transform:uppercase;animation:reveal 2.4s 1.2s ease both}
 #gate .access{margin:64px auto 0;width:min(380px,100%);animation:reveal 2s 2.2s ease both}
 #gate form{display:flex;border-bottom:1px solid rgba(200,167,119,.7)}
@@ -62,6 +62,21 @@ img{display:block;max-width:100%}
 @keyframes shake{25%{transform:translateX(-8px)}50%{transform:translateX(7px)}75%{transform:translateX(-4px)}}
 @keyframes reveal{from{opacity:0;transform:translateY(12px) scale(.98)}}
 @keyframes fadeup{from{opacity:0;transform:translateY(20px)}}
+
+
+/* ---------- INTRO FILM (trident → island) ---------- */
+#introfilm{position:fixed;inset:0;z-index:70;background:#000;display:none;opacity:1;transition:opacity 1.1s ease,transform 1.4s ease}
+#introfilm.on{display:block}
+#introfilm.out{opacity:0;transform:scale(1.05);pointer-events:none}
+#introfilm .bd{position:absolute;inset:-40px;background:url(img/intro-last.webp) center/cover;filter:blur(36px) brightness(.55);opacity:0;transition:opacity 1.2s ease}
+#introfilm.sea .bd{opacity:1}
+#introfilm video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#introfilm .tap{position:absolute;inset:0;z-index:3;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:rgba(0,0,0,.35);color:#E2CFAE;font:400 12px var(--f);letter-spacing:.3em;text-transform:uppercase}
+#introfilm .tap span{width:84px;height:84px;border-radius:50%;border:1px solid #C89832;display:grid;place-items:center;font-size:26px;letter-spacing:0}
+#introfilm .tap.on{display:flex}
+#introfilm .skip{position:absolute;right:clamp(16px,3vw,40px);bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:2;border:1px solid rgba(201,166,118,.7);color:#E2CFAE;border-radius:40px;padding:10px 20px;font:400 11.5px var(--f);letter-spacing:.2em;text-transform:uppercase;background:rgba(0,0,0,.35)}
+
+#hero .replay{width:auto!important;padding:0 20px;border-radius:40px!important;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;gap:10px;display:flex!important;align-items:center}
 
 /* ---------- HEADER ---------- */
 header{position:fixed;top:0;left:0;right:0;z-index:30;padding:calc(12px + var(--st)) var(--pad) 0;transition:background .5s,color .5s,backdrop-filter .5s}
@@ -313,7 +328,7 @@ ul.lines li b{font-weight:500}
 .page{display:none}
 .page.active{display:block;animation:pagein .9s cubic-bezier(.2,.65,.2,1) both}
 @keyframes pagein{from{opacity:0;transform:translateY(24px)}}
-.page:not(#home)>section:first-child{padding-top:calc(clamp(120px,22vh,220px) + 40px)}
+.page:not(#la-brochure)>section:first-child:not(.pagetop){padding-top:calc(clamp(120px,22vh,220px) + 40px)}
 section[id]{scroll-margin-top:110px}
 .acards{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:44px}
 .acard{display:flex;flex-direction:column;text-decoration:none;padding:28px 22px 22px;border:1px solid var(--line);min-height:300px;background:rgba(255,255,255,.28);transition:background .4s,transform .4s}
@@ -324,6 +339,30 @@ section[id]{scroll-margin-top:110px}
 .acard .ago{font-size:13px;font-weight:400;margin-top:18px;text-decoration:underline;text-underline-offset:5px}
 @media (max-width:1100px){.acards{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:600px){.acards{grid-template-columns:1fr}.acard{min-height:0}}
+
+
+/* ---------- SWIPE / DRAG + custom pointer ---------- */
+#scroller{touch-action:pan-y}
+#scroller img{-webkit-user-drag:none;user-select:none}
+body.dragging,body.dragging *{user-select:none!important;-webkit-user-select:none!important}
+.page.active.drag{animation:none;transition:none}
+.page.active.snap{transition:transform .45s cubic-bezier(.2,.65,.2,1),opacity .45s}
+.pager{display:flex;justify-content:space-between;align-items:center;gap:16px;max-width:1180px;margin:0 auto;padding:30px var(--pad) 80px}
+.pager a{text-decoration:none;display:flex;flex-direction:column;gap:6px;max-width:45%}
+.pager a.next{text-align:right;margin-left:auto}
+.pager small{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--soft)}
+.pager b{font-weight:300;text-transform:uppercase;font-size:clamp(17px,1.8vw,24px)}
+.pager .hint{font-size:12px;color:var(--soft);text-align:center;flex:1;letter-spacing:.06em}
+@media (max-width:700px){.pager .hint{display:none}}
+#cursor{position:fixed;left:0;top:0;z-index:90;pointer-events:none;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;border:1px solid var(--ink);display:grid;place-items:center;
+  transition:width .35s cubic-bezier(.2,.65,.2,1),height .35s cubic-bezier(.2,.65,.2,1),margin .35s cubic-bezier(.2,.65,.2,1),background .35s,border-color .35s,opacity .3s;mix-blend-mode:difference;border-color:#fff;opacity:0}
+#cursor span{font:400 11px var(--f);letter-spacing:.18em;text-transform:uppercase;color:#fff;opacity:0;transition:opacity .25s;white-space:nowrap}
+#cursor.show{opacity:1}
+#cursor.link{width:40px;height:40px;margin:-20px 0 0 -20px;background:rgba(255,255,255,.15)}
+#cursor.drag{width:86px;height:86px;margin:-43px 0 0 -43px;background:rgba(255,255,255,.08)}
+#cursor.drag span{opacity:1}
+#cursor.down{transform:scale(.85)}
+@media (pointer:coarse){#cursor{display:none}}
 
 /* ---------- FAQ ---------- */
 .tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0 40px}
@@ -369,6 +408,274 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
   details .ans{padding-left:0}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;filter:none;transform:none}}
+/* ---------- page-top film ---------- */
+.pagetop{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(30px,5vw,80px);align-items:center;max-width:1180px;margin:0 auto;padding:calc(clamp(120px,20vh,190px) + 30px) var(--pad) clamp(50px,8vh,90px)}
+.pagetop .k{font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.pagetop h1{font-weight:200;font-size:clamp(36px,5vw,70px);line-height:1.04;text-transform:uppercase;margin-bottom:10px}
+.pagetop .it{font-size:15px;letter-spacing:.3em;text-transform:uppercase;color:var(--soft);margin-bottom:22px}
+.pagetop p.lead2{font-size:16px;line-height:1.75;color:var(--soft);max-width:48ch}
+.phone{position:relative;justify-self:center;width:min(360px,80vw);aspect-ratio:9/16;border-radius:28px;overflow:hidden;border:1px solid rgba(200,152,50,.55);box-shadow:0 40px 90px -30px rgba(0,0,0,.8),0 0 0 8px rgba(200,152,50,.06)}
+.phone video,.phone img{width:100%;height:100%;object-fit:cover;display:block}
+.phone .snd{position:absolute;right:12px;bottom:12px;border:1px solid rgba(255,255,255,.6);color:#fff;border-radius:30px;padding:8px 14px;font:400 11px var(--f);letter-spacing:.16em;text-transform:uppercase;background:rgba(0,0,0,.35)}
+.wideframe{border-radius:6px;overflow:hidden;border:1px solid rgba(200,152,50,.45);justify-self:stretch}
+.wideframe img{width:100%;height:auto;display:block}
+@media (max-width:899px){.pagetop{grid-template-columns:1fr;padding-top:calc(150px + var(--st))}.phone{width:min(300px,78vw)}}
+
+#la-brochure .pagetop{padding-top:clamp(80px,12vh,130px)}
+/* ---------- 5th largest feature ---------- */
+.fifth{display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,4vw,60px);align-items:center;max-width:1000px;margin:0 auto;padding:clamp(40px,7vh,80px) clamp(24px,4vw,56px);border:1px solid rgba(200,152,50,.45);background:linear-gradient(135deg,rgba(23,62,117,.35),rgba(6,0,26,.2))}
+.fifth .big{font-weight:200;font-size:clamp(120px,16vw,220px);line-height:.8;color:var(--champ)}
+.fifth .big sup{font-size:.32em;vertical-align:top;margin-left:4px;color:var(--gold)}
+.fifth h3{font-weight:300;text-transform:uppercase;font-size:clamp(22px,2.4vw,32px);color:var(--ink);margin-bottom:10px;letter-spacing:.02em}
+.fifth p{font-size:14.5px}
+.fifth small{display:block;margin-top:14px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+@media (max-width:700px){.fifth{grid-template-columns:1fr;text-align:center}}
+
+/* ---------- article (the signing) ---------- */
+.article{max-width:820px;margin:0 auto}
+.article .meta{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.article h2{font-size:clamp(28px,3.4vw,46px)}
+.article p{font-size:17px;line-height:1.85;margin-bottom:22px;color:#D9D3E2}
+.article p.dropcap::first-letter{float:left;font-size:72px;line-height:.85;padding:6px 12px 0 0;color:var(--gold);font-weight:200}
+.article figure{margin:36px 0;border:1px solid rgba(200,152,50,.45)}
+.article figure img{width:100%;display:block}
+.article figcaption{font-size:12.5px;color:var(--soft);padding:12px 16px;border-top:1px solid var(--line)}
+.article blockquote{margin:34px 0;padding:6px 0 6px 26px;border-left:1px solid var(--gold);font-weight:200;font-size:clamp(22px,2.4vw,30px);line-height:1.35;color:var(--champ)}
+.article blockquote cite{display:block;font-style:normal;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:12px}
+.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:30px 0}
+.roles div{background:var(--navy);padding:24px 20px}
+.roles b{display:block;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-weight:500}
+.roles span{font-size:14px;color:var(--soft);line-height:1.6}
+@media (max-width:700px){.roles{grid-template-columns:1fr}}
+
+/* ---------- prices & payment plan ---------- */
+.pricebox{max-width:900px;margin:0 auto;text-align:center}
+.pricebox .big2{font-weight:200;font-size:clamp(34px,5vw,64px);line-height:1.05;text-transform:uppercase;color:var(--champ)}
+.pricebox .every{font-size:clamp(20px,2.2vw,28px);font-weight:300;color:var(--ink);margin-top:6px}
+.pricebox .sf{font-size:12px;letter-spacing:.42em;text-transform:uppercase;color:var(--champ);margin:40px 0 20px}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;max-width:760px;margin:0 auto}
+.pgrid div{padding:22px 10px}
+.pgrid div:nth-child(odd){border-right:1px solid var(--line)}
+.pgrid div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+.pgrid h4{font-weight:300;font-size:clamp(20px,2.2vw,30px);color:var(--champ);letter-spacing:.04em}
+.pgrid .aed{font-size:13px;letter-spacing:.14em;color:var(--ink)}
+.pgrid .m{font-size:clamp(28px,3.2vw,42px);font-weight:300;color:#fff;margin-left:6px}
+.pgrid small{display:block;color:var(--soft);font-size:14px;margin-top:4px}
+.four{margin-top:34px}
+.four h4{font-weight:300;font-size:clamp(20px,2.2vw,30px);color:var(--champ)}
+.four span{font-size:12px;letter-spacing:.3em;color:var(--ink)}
+.cta2{display:inline-block;margin-top:36px;border:1px solid var(--gold);padding:14px 28px;font-size:13px;letter-spacing:.34em;text-transform:uppercase;color:var(--champ);text-decoration:none}
+.cta2:hover{background:var(--gold);color:var(--navy)}
+.plan2{max-width:900px;margin:0 auto}
+.plan2 .ttl{text-align:center;font-weight:200;font-size:clamp(30px,4.4vw,58px);line-height:1.08;text-transform:uppercase;color:var(--champ)}
+.plan2 .pp{text-align:center;font-size:14px;letter-spacing:.42em;text-transform:uppercase;color:var(--ink);margin:30px 0 18px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+.split50{display:grid;grid-template-columns:1fr 1fr;margin:30px 0 40px}
+.split50 div{padding:22px 26px;display:flex;align-items:center;gap:16px;justify-content:center}
+.split50 div:first-child{background:var(--blue)}
+.split50 div:last-child{border:1px solid var(--gold)}
+.split50 b{font-weight:300;font-size:clamp(30px,3.6vw,44px)}
+.split50 div:first-child b{color:#fff}.split50 div:last-child b{color:var(--champ)}
+.split50 span{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink)}
+.plan2 h5{font-weight:300;font-size:22px;color:var(--champ);margin-bottom:18px}
+.tl{display:grid;grid-template-columns:repeat(9,1fr);position:relative;margin-bottom:46px}
+.tl::before{content:"";position:absolute;left:5%;right:5%;top:55px;height:1px;background:rgba(200,152,50,.45)}
+.tl div{text-align:center;position:relative}
+.tl b{display:block;font-weight:300;font-size:clamp(18px,2.2vw,30px);color:var(--ink);height:44px}
+.tl div:first-child b{color:var(--champ)}
+.tl i{display:block;width:10px;height:10px;border-radius:50%;background:var(--gold);margin:6px auto 12px}
+.tl div:first-child i{width:18px;height:18px;margin:2px auto 8px}
+.tl span{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);line-height:1.5;display:block}
+.after .num{font-weight:300;font-size:clamp(40px,5vw,62px);color:var(--champ)}
+.after .x{font-size:20px;color:var(--ink);margin-left:10px}
+.dots{display:flex;justify-content:space-between;margin-top:18px}
+.dots i{width:12px;height:12px;border-radius:50%;background:var(--gold);opacity:0;transform:scale(.3);transition:all .5s}
+.dots.in i{opacity:1;transform:none}
+.priceimg{max-width:900px;margin:40px auto 0;border:1px solid rgba(200,152,50,.35)}
+.priceimg img{width:100%;display:block}
+@media (max-width:700px){.tl{grid-template-columns:repeat(3,1fr);row-gap:24px}.tl::before{display:none}.split50{grid-template-columns:1fr}.dots i{width:7px;height:7px}}
+
+/* ---------- continue-to-next teaser ---------- */
+.nextup{display:block;text-decoration:none;text-align:center;padding:clamp(70px,12vh,130px) var(--pad);border-top:1px solid var(--line);background:linear-gradient(180deg,transparent,rgba(23,62,117,.25))}
+.nextup small{font-size:11.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold)}
+.nextup b{display:block;font-weight:200;font-size:clamp(34px,5vw,68px);text-transform:uppercase;color:var(--champ);margin:12px 0 8px}
+.nextup span{font-size:13px;color:var(--soft);letter-spacing:.08em}
+.nextup .bar3{width:160px;height:1px;background:rgba(200,152,50,.3);margin:22px auto 0;position:relative;overflow:hidden}
+.nextup .bar3 i{position:absolute;inset:0;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .15s linear}
+
+
+/* =========================================================
+   SHEBARA LOOK: full-screen film heroes on every chapter,
+   pearl pages, gold accents taken from the Maserati sheets
+   ========================================================= */
+:root{--gold:#A8843F;--champ:#8A6A35;--blue:#173E75;--navy:#06001A}
+#hero .bg video{width:100%;height:100%;object-fit:cover}
+.vhero{position:relative;min-height:100svh;overflow:hidden;color:#fff;background:#1c1530}
+.vhero .vbg{position:absolute;inset:0}
+.vhero .vbg video,.vhero .vbg img{width:100%;height:100%;object-fit:cover;display:block}
+.vhero .vbg img.kb{animation:kb 26s ease-in-out infinite alternate}
+.vhero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,14,32,.45),rgba(20,14,32,.05) 35%,rgba(20,14,32,.1) 60%,rgba(20,14,32,.7));pointer-events:none}
+.vhero .vtx{position:absolute;z-index:2;left:var(--pad);top:calc(150px + var(--st));max-width:min(620px,80vw)}
+.vhero .k{font-size:11.5px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:14px}
+.vhero h1{font-weight:300;font-size:clamp(30px,3.6vw,52px);line-height:1.08;text-transform:uppercase;color:#fff;letter-spacing:.01em}
+.vhero .it{font-size:12.5px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-top:10px}
+.vhero .vlead{position:absolute;z-index:2;left:var(--pad);bottom:clamp(40px,8vh,80px);max-width:min(440px,80vw)}
+.vhero .vlead .dash{background:#fff;margin-bottom:16px}
+.vhero .vlead p{color:#fff;font-size:14px;line-height:1.6}
+.vctl{position:absolute;z-index:2;right:var(--pad);bottom:clamp(40px,8vh,80px);display:flex;gap:12px}
+.vctl button{width:50px;height:50px;border-radius:50%;border:1px solid rgba(255,255,255,.75);color:#fff;display:grid;place-items:center;background:rgba(0,0,0,.08)}
+.vctl .vsnd .w{opacity:0}.vctl .vsnd.on .w{opacity:1}
+@media (max-width:899px){.vhero .vtx{top:calc(140px + var(--st))}}
+
+/* light versions of the new components */
+.fifth{background:rgba(255,255,255,.4);border-color:rgba(168,132,63,.5)}
+.fifth .big{color:var(--champ)}.fifth h3{color:var(--ink)}.fifth small{color:var(--gold)}
+.article .meta{color:var(--gold)}
+.article p{color:var(--soft)}
+.article p.dropcap::first-letter{color:var(--gold)}
+.article figure{border-color:rgba(168,132,63,.45);background:#fff}
+.article figcaption{color:var(--soft);border-color:var(--line)}
+.article blockquote{color:var(--ink);border-color:var(--gold)}
+.article blockquote cite{color:var(--gold)}
+.roles{background:var(--line);border-color:var(--line)}
+.roles div{background:rgba(255,255,255,.55)}
+.roles b{color:var(--gold)}.roles span{color:var(--soft)}
+.pricebox .big2,.plan2 .ttl{color:var(--ink)}
+.pricebox .every{color:var(--soft)}
+.pricebox .sf,.plan2 .pp{color:var(--gold);border-color:var(--line)}
+.pgrid div{border-color:var(--line)!important}
+.pgrid h4,.four h4{color:var(--champ)}
+.pgrid .aed,.four span{color:var(--ink)}
+.pgrid .m{color:var(--ink);font-weight:200}
+.pgrid small{color:var(--soft)}
+.cta2{border-color:var(--ink);color:var(--ink);font-size:12px}
+.cta2:hover{background:var(--ink);color:#fff}
+.split50 div:first-child{background:var(--blue)}
+.split50 div:last-child{border-color:var(--gold);background:rgba(255,255,255,.4)}
+.split50 div:first-child span{color:#fff}
+.split50 div:last-child b{color:var(--champ)}
+.split50 div:last-child span{color:var(--ink)}
+.plan2 h5{color:var(--champ)}
+.tl::before{background:rgba(168,132,63,.5)}
+.tl b{color:var(--ink);font-weight:200}.tl div:first-child b{color:var(--champ)}
+.tl i,.dots i{background:var(--gold)}
+.tl span{color:var(--soft)}
+.after .num{color:var(--champ);font-weight:200}.after .x{color:var(--ink)}
+.priceimg{border:0}
+.nextup{border-color:var(--line);background:linear-gradient(180deg,transparent,rgba(255,255,255,.45))}
+.nextup small{color:var(--gold)}.nextup b{color:var(--ink);font-weight:300}.nextup span{color:var(--soft)}
+.nextup .bar3{background:var(--line)}.nextup .bar3 i{background:var(--ink)}
+/* scroll-linked word reveal, like the Shebara statement */
+.wordfill .w{color:rgba(43,42,48,.18);transition:color .25s linear}
+.wordfill .w.on{color:var(--ink)}
+
+
+header .hmark{display:block!important;height:42px;line-height:0}
+header .hmark img{height:100%;width:auto;display:block}
+header.dark .hmark img{filter:drop-shadow(0 1px 6px rgba(0,0,0,.35))}
+@media (max-width:700px){header .hmark{height:30px}}
+.minutes{color:#fff}
+.minutes .bgi{background-image:url(img/lv-017-015.webp)!important}
+.minutes .bgi::after{background:linear-gradient(90deg,rgba(30,22,40,.7),rgba(30,22,40,.15))!important}
+
+
+/* ---------- Il Concetto ---------- */
+.csteps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.cstep{background:#fff;border:1px solid var(--line);overflow:hidden;transition:transform .5s,box-shadow .5s}
+.cstep:hover{transform:translateY(-4px);box-shadow:0 24px 50px -30px rgba(40,30,60,.5)}
+.cstep img{width:100%;aspect-ratio:4/3;object-fit:contain;background:#fff;padding:10px;transform:none!important}
+.cstep figcaption{padding:16px 18px 18px;border-top:1px solid var(--line);background:rgba(255,255,255,.6)}
+.cstep i{font-style:normal;font-size:11px;color:var(--gold);letter-spacing:.2em;margin-right:10px}
+.cstep b{font-weight:400;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+.cstep span{display:block;font-size:13.5px;color:var(--soft);margin-top:6px;line-height:1.55}
+.sketchrow{display:flex;gap:16px;overflow-x:auto;padding:30px var(--pad) 20px;scrollbar-width:none;cursor:grab}
+.sketchrow::-webkit-scrollbar{display:none}
+.sk{flex:none;width:min(520px,80vw);background:#fff;border:1px solid var(--line);text-align:left;padding:0}
+.sk img{width:100%;aspect-ratio:1280/905;object-fit:contain;display:block;pointer-events:none}
+.sk span{display:block;padding:12px 16px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);border-top:1px solid var(--line)}
+@media (max-width:899px){.csteps{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.csteps{grid-template-columns:1fr}}
+.vhero.sketch::after{background:linear-gradient(180deg,rgba(20,14,32,.82),rgba(20,14,32,.45) 40%,rgba(20,14,32,.8))}
+.vhero.sketch .vbg img{object-position:center 70%!important}
+
+/* ---------- chapter overviews ---------- */
+.overview{padding-top:clamp(90px,14vh,150px)}
+.ovgrid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(30px,6vw,90px);max-width:1180px;margin:0 auto;align-items:start}
+.ovk{font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.overview h2{font-size:clamp(26px,3vw,42px);margin:0}
+.ovtxt{font-size:clamp(20px,2.1vw,30px);line-height:1.45;font-weight:300}
+.ovimgs{display:grid;grid-template-columns:1.2fr .8fr 1fr;gap:16px;max-width:1180px;margin:clamp(50px,8vh,80px) auto 0;align-items:end}
+.ovimg{overflow:hidden;position:relative}
+.ovimg:nth-child(1){aspect-ratio:4/5}.ovimg:nth-child(2){aspect-ratio:3/4;margin-bottom:12%}.ovimg:nth-child(3){aspect-ratio:1/1}
+.ovimg img{width:100%;height:118%;object-fit:cover;display:block;transform:translateY(var(--py,0px)) scale(1.06);transition:transform .1s linear}
+@media (max-width:899px){.ovgrid{grid-template-columns:1fr}.ovimgs{grid-template-columns:1fr 1fr}.ovimg:nth-child(3){display:none}}
+header .agenda{gap:clamp(10px,1.5vw,26px)!important}
+header .agenda a{font-size:12px!important;letter-spacing:.05em!important}
+header .hmark{height:48px!important}
+@media (max-width:700px){header .hmark{height:32px!important}}
+
+/* Shebara palette: pearl, dark ink type, quiet grey labels */
+:root{--gold:#6E6A75;--champ:#2B2A30}
+section h2,.chapter h2,.overview h2{color:#2B2A30}
+.dash{background:#2B2A30}
+.ovk,.vhero .k{letter-spacing:.3em}
+#il-concetto .vhero .vbg{background:#050307}#il-concetto .vhero video{object-fit:contain}
+
+/* ================= SHEBARA SYSTEM: one look for every chapter ================= */
+:root{--ink:#2E2C31;--soft:#77737C;--line:rgba(46,44,49,.16)}
+body{color:var(--ink)}
+main p, main li{color:var(--ink)}
+section h2,.overview h2,.chapter h2{font-weight:400;text-transform:uppercase;letter-spacing:.015em;line-height:1.12;color:var(--ink)!important}
+.ovk,.it{font-size:11px!important;letter-spacing:.32em!important;text-transform:uppercase;color:var(--soft)!important;font-style:normal;margin-bottom:12px;opacity:1!important}
+.dash{background:var(--ink)!important;width:22px!important;height:1px!important}
+section p{font-size:14px;line-height:1.75}
+.am{font-size:12.5px!important;color:var(--soft)!important}
+/* heroes: full screen film, title top-left, short line bottom-left, round buttons bottom-right */
+.vhero,#hero{height:100svh!important;min-height:560px}
+.vhero .vbg video,.vhero .vbg img,#hero .bg video{width:100%!important;height:100%!important;object-fit:cover!important;left:0!important;transform:none}
+.vhero .vtx{position:absolute;left:var(--pad);top:clamp(120px,17vh,170px);bottom:auto!important}
+.vhero .vtx h1,#hero h1{font-weight:400;text-transform:uppercase;font-size:clamp(28px,3vw,46px)!important;line-height:1.1;letter-spacing:.01em}
+.vhero .vtx .k{font-size:11px;letter-spacing:.32em;opacity:.85}
+.vhero .vtx .it{color:rgba(255,255,255,.8)!important}
+#hero .txt{position:absolute!important;inset:0!important;padding:0 var(--pad);max-width:none!important;width:auto!important;margin:0!important;transform:none!important}
+@media (max-width:700px){#hero .txt p{bottom:110px!important;max-width:none;right:var(--pad)} #hero .ctrl{bottom:40px!important} #hero .replay{display:none!important}}
+#hero h1{position:absolute;left:var(--pad);top:clamp(120px,17vh,170px);margin:0}
+#hero .txt p{position:absolute;left:var(--pad);bottom:clamp(40px,7vh,70px);max-width:440px;font-size:12.5px;line-height:1.6;color:#fff!important}
+#hero .txt p::before{content:"";display:block;width:22px;height:1px;background:#fff;margin-bottom:14px}
+#hero .ctrl{position:absolute!important;right:var(--pad)!important;left:auto!important;bottom:clamp(40px,7vh,70px)!important;margin:0!important}
+.stats span,section small,.icons p,.ic p{font-size:12px!important;line-height:1.5}
+#hero .scroll{display:none}
+.vhero .vlead p{font-size:12.5px!important;color:#fff!important}
+.vhero .vlead .dash{background:#fff!important}
+.vhero::after,#hero::after{background:linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,0) 30%,rgba(0,0,0,0) 62%,rgba(0,0,0,.4))!important}
+@media (orientation:portrait){ #il-concetto .vhero video,#introfilm video{object-fit:contain!important} }
+@media (orientation:landscape){ #il-concetto .vhero video{object-fit:cover!important} }
+/* overview: heading left, text right, one big picture */
+.ovimgs.one{display:block!important;margin-top:clamp(40px,7vh,80px)}
+.ovimgs.one .ovimg{width:100%!important;aspect-ratio:2.15/1;height:auto!important;margin:0!important;overflow:hidden;transform:none!important}
+.ovimgs.one .ovimg img{width:100%;height:120%;object-fit:cover}
+.ovimgs.one .ovimg.paper{background:#fff}
+.ovimgs.one .ovimg.paper img{object-fit:contain;height:100%}
+/* no dark blocks inside chapters */
+.minutes{color:var(--ink)!important;padding-left:0!important;padding-right:0!important}
+.minutes .bgi{display:none!important}
+.minutes p,.minutes h2,.minutes b,.minutes li{color:var(--ink)!important}
+.minutes .stats,.minutes .stats div,.minutes ul.lines li{border-color:var(--line)!important}
+.minutes .stats span{color:var(--soft)!important}
+.fifth{background:rgba(255,255,255,.35)!important;border:1px solid var(--line)!important}
+.fifth .big,.fifth h3{color:var(--ink)!important}
+.roles div{background:rgba(255,255,255,.4)!important;color:var(--ink)!important;border:1px solid var(--line)}
+.roles div *{color:var(--ink)!important}
+.split50 div:first-child{background:var(--ink)!important}
+.pgrid .m{color:var(--ink)!important}
+.explain{background:transparent!important}
+footer{background:transparent!important;color:var(--ink)!important;border-top:1px solid var(--line)}
+footer h2{color:var(--ink)!important;font-weight:400}
+footer .addr,footer .web,footer .toTop{color:var(--ink)!important;border-color:var(--line)!important}
+footer .legal{color:var(--soft)!important}
+footer .clogo{filter:invert(1) brightness(.25)}
+/* images: same proportions everywhere */
+.split .media>img{aspect-ratio:4/3;object-fit:cover;width:100%}
+.chap .col figure img{object-fit:cover}
 </style>
 </head>
 <body class="locked">
@@ -392,19 +699,29 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
   </div>
 </div>
 
+<!-- INTRO FILM -->
+<div id="introfilm" aria-label="Maserati Island introduction film">
+  <div class="bd"></div>
+  <video id="filmV" muted playsinline preload="auto" poster="img/intro-first.webp"><source data-wide="img/intro-film-w.mp4" data-tall="img/intro-film.mp4" src="img/intro-film.mp4" type="video/mp4"></video>
+  <button class="tap" id="filmTap" aria-label="Play the film"><span>▶</span>Tap to play</button>
+  <button class="skip" id="filmSkip">Skip intro</button>
+</div>
+
 <header id="hdr" class="dark">
   <div class="htop">
     <button class="menu" id="openMenu">Menu</button>
-    <a class="hmark" href="#home">maserati island</a>
+    <a class="hmark" href="#la-brochure"><img src="img/maserati-logo.png" alt="Maserati Island Dubai"></a>
     <div class="pills"><a class="pill" href="#layouts">Layouts</a><a class="pill" href="#faq">FAQ</a></div>
   </div>
   <nav class="agenda" id="agendaNav">
-    <a href="#home" data-p="home">Home</a>
-    <a href="#the-developer" data-p="the-developer"><i>01</i>The Developer</a>
-    <a href="#the-world-island" data-p="the-world-island"><i>02</i>The World Island</a>
-    <a href="#living-there" data-p="living-there"><i>03</i>Living There</a>
-    <a href="#built-to-last" data-p="built-to-last"><i>04</i>Built to Last</a>
-    <a href="#the-investment" data-p="the-investment"><i>05</i>The Investment</a>
+    <a href="#la-brochure" data-p="la-brochure">The Brochure</a>
+    <a href="#il-costruttore" data-p="il-costruttore"><i>01</i>The Developer</a>
+    <a href="#la-firma" data-p="la-firma"><i>02</i>The Signing</a>
+    <a href="#il-mondo" data-p="il-mondo"><i>03</i>The World Islands</a>
+    <a href="#il-concetto" data-p="il-concetto"><i>04</i>The Concept</a>
+    <a href="#l-isola" data-p="l-isola"><i>05</i>The Project</a>
+    <a href="#il-valore" data-p="il-valore"><i>06</i>Prices &amp; Payment</a>
+    <a href="#il-finale" data-p="il-finale"><i>07</i>The Finale</a>
   </nav>
 </header>
 
@@ -412,35 +729,39 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
   <div class="pearl"></div>
   <button class="close" id="closeMenu">Close</button>
   <nav>
-    <div class="grp"><a href="#home"><i>00</i>Home</a><div class="subs"><a href="#isola">C'è un'isola unica</a><a href="#experiences">Experiences</a><a href="#lifestyle">La Vita · Lifestyle</a><a href="#maserati">Maserati</a><a href="#agenda">The presentation</a></div></div>
-    <div class="grp"><a href="#the-developer"><i>01</i>The Developer</a><div class="subs">
-      <a href="#developer">SAMANA at a glance</a><a href="#collecta">SAMANA COLLECTA</a><a href="#buyer">What makes a luxury buyer say yes</a></div></div>
-    <div class="grp"><a href="#the-world-island"><i>02</i>The World Island</a><div class="subs">
-      <a href="#film">How do people live on an island?</a><a href="#what">What is The World Islands?</a><a href="#breakwater">The Breakwater</a><a href="#island-life">How life works on an island</a><a href="#neighbours">Who are the neighbours?</a></div></div>
-    <div class="grp"><a href="#living-there"><i>03</i>Living There</a><div class="subs">
-      <a href="#location">Location</a><a href="#project">The Project</a><a href="#layouts">Layouts &amp; floor plans</a></div></div>
-    <div class="grp"><a href="#built-to-last"><i>04</i>Built to Last</a><div class="subs">
-      <a href="#built">How SAMANA runs the island</a></div></div>
-    <div class="grp"><a href="#the-investment"><i>05</i>The Investment</a><div class="subs">
-      <a href="#compare">Maserati Island vs the islands around it</a><a href="#faq">Questions &amp; answers</a></div></div>
+    <div class="grp"><a href="#la-brochure"><i>00</i>The Brochure</a><div class="subs"><a href="#ov-la-brochure">Overview</a><a href="#isola">C'è un'isola unica</a><a href="#experiences">Experiences</a><a href="#lifestyle">La Vita · Lifestyle</a><a href="#agenda">The presentation</a></div></div>
+    <div class="grp"><a href="#il-costruttore"><i>01</i>The Developer</a><div class="subs"><a href="#ov-il-costruttore">Overview</a><a href="#fifth">5th largest off-plan developer</a><a href="#developer">SAMANA Group at a glance</a><a href="#collecta">SAMANA COLLECTA</a><a href="#buyer">What makes a luxury buyer say yes</a></div></div>
+    <div class="grp"><a href="#la-firma"><i>02</i>The Signing</a><div class="subs"><a href="#ov-la-firma">Overview</a><a href="#signing">Maserati and SAMANA COLLECTA unveil Maserati Island</a></div></div>
+    <div class="grp"><a href="#il-mondo"><i>03</i>The World Islands</a><div class="subs"><a href="#ov-il-mondo">Overview</a><a href="#what">What is The World Islands?</a><a href="#breakwater">The Breakwater</a><a href="#island-life">How life works on an island</a><a href="#built">How SAMANA COLLECTA runs the island</a><a href="#neighbours">The neighbours</a></div></div>
+    <div class="grp"><a href="#il-concetto"><i>04</i>The Concept</a><div class="subs"><a href="#ov-il-concetto">Overview</a><a href="#form-evolution">Concept form evolution</a><a href="#the-name">From Collection to Collecta</a><a href="#sketchbook">The sketchbook</a></div></div>
+    <div class="grp"><a href="#l-isola"><i>05</i>The Project</a><div class="subs"><a href="#ov-l-isola">Overview</a><a href="#location">Location</a><a href="#project">The Project</a><a href="#layouts">Layouts &amp; floor plans</a></div></div>
+    <div class="grp"><a href="#il-valore"><i>06</i>Prices &amp; Payment</a><div class="subs"><a href="#ov-il-valore">Overview</a><a href="#prices">Starting prices</a><a href="#payment">Payment plan</a><a href="#compare">Maserati Island vs the islands</a><a href="#faq">Questions &amp; answers</a></div></div>
+    <div class="grp"><a href="#il-finale"><i>07</i>The Finale</a><div class="subs"><a href="#ov-il-finale">Overview</a><a href="#maserati">Il Marchio · Maserati</a><a href="#connect">The invitation</a></div></div>
   </nav>
 </div>
 
+<div id="cursor"><span>‹ Drag ›</span></div>
 <main id="scroller">
 
-<div class="page" id="home">
+<div class="page" id="la-brochure">
 <!-- HERO -->
 <section id="hero">
-  <div class="bg"><img src="img/lv-017-015.webp" alt="Maserati Island seen from the sea at dusk"></div>
+  <div class="bg"><video class="ptv" id="heroV" autoplay muted loop playsinline preload="metadata" poster="img/hero-life.webp"><source data-wide="img/hero-life-w.mp4" data-tall="img/hero-life.mp4" src="img/hero-life.mp4" type="video/mp4"></video></div>
   <div class="txt">
     <h1 class="rv">Life savoured.<br>At your <u>own pace</u>.</h1>
     <p class="rv d1">The first private Maserati Island in the world: 849 homes on one private island at The World Islands, Dubai. About 4 km off the coast and 15 minutes by yacht, it is within sight of the city, yet a world apart. A world never built before. A world worth belonging to.</p>
     <div class="ctrl rv d2">
       <button id="kbBtn" aria-label="Pause motion"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M4 2v10M10 2v10" stroke="currentColor" stroke-width="1.3"/></svg></button>
+      <button class="replay" id="replayFilm" aria-label="Play the intro film"><svg width="12" height="12" viewBox="0 0 14 14"><path d="M4 2l8 5-8 5z" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>Play film</button>
       <a href="#isola" aria-label="Scroll down" style="width:56px;height:56px;border:1px solid rgba(255,255,255,.75);border-radius:50%;display:grid;place-items:center"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 2v10M2 7l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></a>
     </div>
   </div>
   <div class="scroll">Scroll</div>
+</section>
+<section class="overview" id="ov-la-brochure">
+  <div class="ovgrid"><div><span class="dash rv"></span><p class="ovk rv">Overview</p><h2 class="rv d1">The first private island in the world to carry the Trident.</h2></div>
+  <p class="ovtxt wordfill">Maserati Island is 849 homes, seven ways to live and more than 80 amenities on one private island, about four kilometres off Dubai's coast. This is the brochure: the island, its residences and the life around them.</p></div>
+  <div class="ovimgs one"><figure class="ovimg rv d0"><img src="img/lv-019-019.webp" alt="" loading="lazy"></figure></div>
 </section>
 
 <!-- BROCHURE INTRO -->
@@ -448,8 +769,8 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
   <div class="wrap split">
     <div>
       <span class="dash rv"></span>
-      <p class="it rv" style="font-size:12px;letter-spacing:.3em;text-transform:uppercase;opacity:.6;margin-bottom:10px">There is an island</p>
-      <h2 class="rv">C'è un'isola unica</h2>
+      <p class="ovk rv">C'è un'isola unica</p>
+      <h2 class="rv">An island like no other</h2>
       <p class="rv d1">Within sight of Dubai, yet a world apart. The first Maserati residences, moored off Dubai: like living on a private yacht, facing the city's skyline, with the sea on every side. Cast off from the mainland and, about twenty minutes later, you are home.</p>
       <p class="rv d1" style="margin-top:16px">Maserati Island is where you ease off the throttle, and the engine settles into a soothing purr. Here, you revitalise and recharge. You laugh more, and breathe easier. Leggerezza. Luminosità. Vitalità.</p>
     </div>
@@ -461,7 +782,7 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
 <section id="experiences">
   <div class="wrap center">
     <span class="dash rv"></span>
-    <h2 class="rv">Eternally<br>Maserati experiences</h2>
+    <h2 class="rv">Maserati experiences,<br>every day</h2>
   </div>
   <div class="stack">
     <article class="card">
@@ -504,74 +825,39 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
 <!-- LA VITA: LIFESTYLE -->
 <section id="lifestyle">
   <div class="wrap">
-    <div class="center"><span class="dash rv"></span><h2 class="rv">La Vita<br>The Maserati life, anchored</h2>
+    <div class="center"><span class="dash rv"></span><p class="ovk rv">La Vita</p><h2 class="rv">The Maserati life, anchored</h2>
     <p class="rv d1 narrow">The island is a passport to a world. A membership for residents only, based on who you are, how you live, and where you belong. Belonging here is shared: on the crossing, by the sea, at the table, and into the evening.</p></div>
     <div class="chap">
-      <div><span class="dash rv"></span><p class="it rv">The Welcome</p><h2 class="rv">Il Benvenuto</h2><p class="rv d1">The journey to the island is a spectacle in its own right. A gradual immersion into the world of Maserati. Once the silhouette of Dubai starts to fall away, the air turns to salt, and a white streak follows you across turquoise water. The island appears ahead and you arrive at the marina, just beyond lies the Piazza del Nettuno.</p><p class="am rv d2"><b>The amenities</b>25N — the welcome centre · Il Tridente — the arrival marina · La Fontana del Nettuno — the arrival fountain · La Piazza del Nettuno — the ceremonial plaza · Il Faro — the beacon</p></div>
+      <div><span class="dash rv"></span><p class="ovk rv">Il Benvenuto</p><h2 class="rv">The Welcome</h2><p class="rv d1">The journey to the island is a spectacle in its own right. A gradual immersion into the world of Maserati. Once the silhouette of Dubai starts to fall away, the air turns to salt, and a white streak follows you across turquoise water. The island appears ahead, you arrive at the marina, and just beyond lies the Piazza del Nettuno.</p><p class="am rv d2"><b>The amenities</b>25N — the welcome centre · Il Tridente — the arrival marina · La Fontana del Nettuno — the arrival fountain · La Piazza del Nettuno — the ceremonial plaza · Il Faro — the beacon</p></div>
       <div class="col"><figure class="a rvimg"><img src="img/lv-018-017.webp" alt="Arriving by yacht" loading="lazy"></figure><figure class="b rvimg"><img src="img/lv-018-018.webp" alt="Yacht crossing" loading="lazy"></figure><figure class="c rvimg"><img src="img/lv-018-016.webp" alt="Welcome centre" loading="lazy"></figure></div>
     </div>
     <div class="chap flip">
-      <div><span class="dash rv"></span><p class="it rv">The Beach</p><h2 class="rv">La Spiaggia</h2><p class="rv d1">The island's private shoreline. Four beaches. A lagoon. A variety of pools, from infinity to plunge and cascade. Pavilions and decks overlooking the luminescent water. A rhythm that follows the pace of the tide.</p><p class="am rv d2"><b>The amenities</b>Cala — the beach club · Onda — the beach lounge · Le Piscine — the pools</p></div>
+      <div><span class="dash rv"></span><p class="ovk rv">La Spiaggia</p><h2 class="rv">The Beach</h2><p class="rv d1">The island's private shoreline. Four beaches. A lagoon. A variety of pools, from infinity to plunge and cascade. Pavilions and decks overlooking the luminescent water. A rhythm that follows the pace of the tide.</p><p class="am rv d2"><b>The amenities</b>Cala — the beach club · Onda — the beach lounge · Le Piscine — the pools</p></div>
       <div class="col"><figure class="a rvimg"><img src="img/lv-019-019.webp" alt="Beach" loading="lazy"></figure><figure class="b rvimg"><img src="img/lv-020-020.webp" alt="Cascade pool" loading="lazy"></figure><figure class="c rvimg"><img src="img/lv-008-001.webp" alt="Beach club" loading="lazy"></figure><figure class="wide2 rvimg"><img src="img/lv-015-014.webp" alt="Pool deck" loading="lazy"></figure></div>
     </div>
     <div class="chap">
-      <div><span class="dash rv"></span><p class="it rv">The Table</p><h2 class="rv">Il Tavolo</h2><p class="rv d1">The island, united around the table. Generous. Shared. Every space has its own character, and all share one intent: to come together.</p><p class="am rv d2"><b>The amenities</b>Àncora — the floating restaurant · Sei Venti — casual dining · Tramontana — the beach bar · Orizzonte — the pool bar · Zefiro — the juice bar · Orto — the edible garden</p></div>
+      <div><span class="dash rv"></span><p class="ovk rv">Il Tavolo</p><h2 class="rv">The Table</h2><p class="rv d1">The island, united around the table. Generous. Shared. Every space has its own character, and all share one intent: to come together.</p><p class="am rv d2"><b>The amenities</b>Àncora — the floating restaurant · Sei Venti — casual dining · Tramontana — the beach bar · Orizzonte — the pool bar · Zefiro — the juice bar · Orto — the edible garden</p></div>
       <div class="col"><figure class="h1 rvimg"><img src="img/lv-021-021.webp" alt="Restaurant" loading="lazy"></figure><figure class="h2 rvimg"><img src="img/lv-022-022.webp" alt="Sunset dining terrace" loading="lazy"></figure><figure class="wide2 rvimg"><img src="img/lv-009-004.webp" alt="Dinner on the deck" loading="lazy"></figure></div>
     </div>
     <div class="chap flip">
-      <div><span class="dash rv"></span><p class="it rv">The Family</p><h2 class="rv">La Famiglia</h2><p class="rv d1">On the island, play is a family affair. Sandcastles at the water's edge, races through the shallows, a swim before supper. Children and parents share the day, and the island makes it easy.</p><p class="am rv d2"><b>The amenities</b>Il Cavalluccio — family club with indoor play area and toddler room · Giro Girotondo — playground in the island's gardens · Le Ondine — kids' pool by the beach</p></div>
+      <div><span class="dash rv"></span><p class="ovk rv">La Famiglia</p><h2 class="rv">The Family</h2><p class="rv d1">On the island, play is a family affair. Sandcastles at the water's edge, races through the shallows, a swim before supper. Children and parents share the day, and the island makes it easy.</p><p class="am rv d2"><b>The amenities</b>Il Cavalluccio — family club with indoor play area and toddler room · Giro Girotondo — playground in the island's gardens · Le Ondine — kids' pool by the beach</p></div>
       <div class="col"><figure class="w rvimg"><img src="img/lv-023-023.webp" alt="Family club" loading="lazy"></figure></div>
     </div>
     <div class="chap">
-      <div><span class="dash rv"></span><p class="it rv">The Tranquillity</p><h2 class="rv">La Tranquillità</h2><p class="rv d1">Some of the best moments on the island are the quiet ones. Resting in a hammock between two palm trees. Reading on a bench scented with flowering jasmine. Walking along shaded promenades. An abundance of spaces to breathe, rest, balance and reflect.</p><p class="am rv d2"><b>The amenities</b>Il Giardino — the gardens · Il Respiro — the yoga garden · La Passeggiata — the promenades · Il Boschetto — the hammock groves · Il Prato — the picnic lawn</p></div>
+      <div><span class="dash rv"></span><p class="ovk rv">La Tranquillità</p><h2 class="rv">The Tranquillity</h2><p class="rv d1">Some of the best moments on the island are the quiet ones. Resting in a hammock between two palm trees. Reading on a bench scented with flowering jasmine. Walking along shaded promenades. An abundance of spaces to breathe, rest, balance and reflect.</p><p class="am rv d2"><b>The amenities</b>Il Giardino — the gardens · Il Respiro — the yoga garden · La Passeggiata — the promenades · Il Boschetto — the hammock groves · Il Prato — the picnic lawn</p></div>
       <div class="col"><figure class="a rvimg"><img src="img/lv-024-025.webp" alt="Zen garden" loading="lazy"></figure><figure class="b rvimg"><img src="img/lv-024-024.webp" alt="Salon" loading="lazy"></figure><figure class="c rvimg"><img src="img/lv-024-027.webp" alt="Promenade" loading="lazy"></figure></div>
     </div>
     <div class="chap flip">
-      <div><span class="dash rv"></span><p class="it rv">The Vitality</p><h2 class="rv">La Vitalità</h2><p class="rv d1">Vitality comes naturally on the island. A morning run along the Mille Miglia jogging track. A workout in the gym or under the open sky. An hour of Pilates, followed by an hour on the water. Afterwards, the spa: massage, sauna and a slow swim in the vitality pool.</p><p class="am rv d2"><b>The amenities</b>Folgore — the sports club · Mille Miglia — the running route · Miramare — the water sports club · Andante — the spa</p></div>
+      <div><span class="dash rv"></span><p class="ovk rv">La Vitalità</p><h2 class="rv">The Vitality</h2><p class="rv d1">Vitality comes naturally on the island. A morning run along the Mille Miglia jogging track. A workout in the gym or under the open sky. An hour of Pilates, followed by an hour on the water. Afterwards, the spa: massage, sauna and a slow swim in the vitality pool.</p><p class="am rv d2"><b>The amenities</b>Folgore — the sports club · Mille Miglia — the running route · Miramare — the water sports club · Andante — the spa</p></div>
       <div class="col"><figure class="t1 rvimg"><img src="img/lv-025-030.webp" alt="Workout" loading="lazy"></figure><figure class="t2 rvimg"><img src="img/lv-025-028.webp" alt="Gym" loading="lazy"></figure><figure class="t3 rvimg"><img src="img/lv-025-029.webp" alt="Spa" loading="lazy"></figure><figure class="wide2 rvimg"><img src="img/lv-013-012.webp" alt="Morning coffee" loading="lazy"></figure></div>
     </div>
     <div class="chap">
-      <div><span class="dash rv"></span><p class="it rv">The Activity</p><h2 class="rv">L'Attività</h2><p class="rv d1">Beyond the beach and the table, the island offers places to focus and places to gather. L'Officina is the co-working centre, with lounge, boardroom and a holographic meeting room. La Voce is the podcast and content studio. And for the community: the amphitheatre under the open sky, the gathering terrace and the residents' lounge.</p><p class="am rv d2"><b>The amenities</b>1914 — the residents' lounge · L'Officina — the co-working centre · La Voce — the podcast & content studio · Aria — the amphitheatre</p></div>
+      <div><span class="dash rv"></span><p class="ovk rv">L'Attività</p><h2 class="rv">The Activity</h2><p class="rv d1">Beyond the beach and the table, the island offers places to focus and places to gather. L'Officina is the co-working centre, with lounge, boardroom and a holographic meeting room. La Voce is the podcast and content studio. And for the community: the amphitheatre under the open sky, the gathering terrace and the residents' lounge.</p><p class="am rv d2"><b>The amenities</b>1914 — the residents' lounge · L'Officina — the co-working centre · La Voce — the podcast & content studio · Aria — the amphitheatre</p></div>
       <div class="col"><figure class="h1 rvimg"><img src="img/lv-026-031.webp" alt="Residents lounge" loading="lazy"></figure><figure class="h2 rvimg"><img src="img/lv-026-032.webp" alt="Podcast studio" loading="lazy"></figure></div>
     </div>
     <div class="chap flip">
-      <div><span class="dash rv"></span><p class="it rv">The Key</p><h2 class="rv">La Chiave</h2><p class="rv d1">Your residence key opens the door of your island home, and also brings membership of the Maserati Island Owners Club UAE: a passport to the wider world of Maserati, across Dubai and the Northern Emirates. Drives, getaways, gatherings, and the stories behind the icon.</p><p class="am rv d2"><b>Membership privileges</b>Scenic drives · Exclusive lifestyle and social events · Weekend getaways · Curated brand storytelling · VIP passes</p></div>
+      <div><span class="dash rv"></span><p class="ovk rv">La Chiave</p><h2 class="rv">The Key</h2><p class="rv d1">Your residence key opens the door of your island home, and also brings membership of the Maserati Island Owners Club UAE: a passport to the wider world of Maserati, across Dubai and the Northern Emirates. Drives, getaways, gatherings, and the stories behind the icon.</p><p class="am rv d2"><b>Membership privileges</b>Scenic drives · Exclusive lifestyle and social events · Weekend getaways · Curated brand storytelling · VIP passes</p></div>
       <div class="col"><figure class="w rvimg"><img src="img/lv-027-033.webp" alt="The residence key" loading="lazy"></figure></div>
-    </div>
-  </div>
-</section>
-
-<!-- MASERATI -->
-<section id="maserati">
-  <div class="wrap split flip">
-    <div class="media rv"><img src="img/car.webp" alt="Classic Maserati"><div class="small"><img src="img/trident.webp" alt="The Maserati Tridente"></div></div>
-    <div>
-      <span class="dash rv"></span>
-      <h2 class="rv">Il Marchio.<br>A homecoming.</h2>
-      <p class="rv d1">For more than a century Maserati has stood as a powerful symbol of culture, design and style. Of dolce vita itself: the art of savouring the details, the small things, the moments.</p>
-      <p class="rv d1" style="margin-top:16px">Since 1914, this has been the philosophy behind everything Maserati has created. Now it is finding its home on the water, in a private island and the world's first Maserati residences. And for the Tridente, which has marked every Maserati since 1926, the island is its natural home.</p>
-      <ul class="lines rv d2">
-        <li><b>This is the island of the Tridente.</b> It weaves the power of the sea with the form, the line and the proportion of a Maserati.</li>
-        <li><b>Interior design by Maserati</b>, with the supply of certain Maserati products. SAMANA is the developer.</li>
-        <li><b>Leggerezza. Luminosità. Vitalità.</b></li>
-      </ul>
-    </div>
-  </div>
-  <div class="wrap">
-    <div class="center" style="margin-top:clamp(70px,12vh,140px)"><span class="dash rv"></span><h2 class="rv">La Dolce Vita</h2>
-    <p class="rv d1 narrow">You might find it in the feel of the leather steering wheel, the way a Maserati seems to glide effortlessly over the road. Or an aperitivo taken slowly at sunset. Sip by sip. No rush. Just a knowing appreciation of the moment.</p></div>
-    <div class="mosaic">
-      <figure class="big rvimg"><img src="img/lv-013-009.webp" alt="Maserati convertible by the sea" loading="lazy"></figure>
-      <figure class="rvimg"><img src="img/lv-013-010.webp" alt="Maserati leather seat" loading="lazy"></figure>
-      <figure class="tall rvimg"><img src="img/lv-012-007.webp" alt="Maserati at dusk" loading="lazy"></figure>
-      <figure class="rvimg"><img src="img/lv-013-011.webp" alt="Maserati cabin" loading="lazy"></figure>
-      <figure class="tall rvimg"><img src="img/lv-009-003.webp" alt="Neptune statue" loading="lazy"></figure>
-      <figure class="rvimg"><img src="img/lv-013-008.webp" alt="The Tridente" loading="lazy"></figure>
-      <figure class="big rvimg"><img src="img/lv-009-002.webp" alt="Sailing" loading="lazy"></figure>
-      <figure class="rvimg"><img src="img/lv-009-006.webp" alt="Sculpted detail" loading="lazy"></figure>
-      <figure class="rvimg"><img src="img/lv-007-000.webp" alt="Maserati Tridente on the bonnet" loading="lazy"></figure>
-      <figure class="rvimg"><img src="img/lv-014-013.webp" alt="Classic Maserati" loading="lazy"></figure>
-      <figure class="rvimg"><img src="img/lv-017-015.webp" alt="Maserati Island from the sea" loading="lazy"></figure>
     </div>
   </div>
 </section>
@@ -582,39 +868,55 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
 <section id="agenda">
   <div class="wrap">
     <div class="center"><span class="dash rv"></span><h2 class="rv">The presentation</h2>
-    <p class="rv d1 narrow">Five chapters. Choose one to open it.</p></div>
-    <div class="acards">
-      <a class="acard rv" href="#the-developer"><span class="an">01</span><b>The Developer</b><span class="ad">SAMANA at a glance, SAMANA COLLECTA, and what makes a luxury buyer say yes.</span><span class="ago">Open →</span></a>
-      <a class="acard rv d1" href="#the-world-island"><span class="an">02</span><b>The World Island</b><span class="ad">The film, the islands, the breakwater, island life and the neighbours.</span><span class="ago">Open →</span></a>
-      <a class="acard rv d2" href="#living-there"><span class="an">03</span><b>Living There</b><span class="ad">Location and maps, the project, and every layout with its floor plan.</span><span class="ago">Open →</span></a>
-      <a class="acard rv" href="#built-to-last"><span class="an">04</span><b>Built to Last</b><span class="ad">How SAMANA builds and runs the island's utilities and boats.</span><span class="ago">Open →</span></a>
-      <a class="acard rv d1" href="#the-investment"><span class="an">05</span><b>The Investment</b><span class="ad">How Maserati Island compares, and the questions buyers ask.</span><span class="ago">Open →</span></a>
+    <p class="rv d1 narrow">Seven chapters, from the developer to the finale. Choose one to open it.</p></div>
+    <div class="acards" style="grid-template-columns:repeat(4,1fr)">
+      <a class="acard rv" href="#il-costruttore"><span class="an">01</span><b>The Developer</b><span class="ad">Every island needs a builder the market trusts.</span><span class="ago">Open →</span></a>
+      <a class="acard rv" href="#la-firma"><span class="an">02</span><b>The Signing</b><span class="ad">The Trident comes home to the water.</span><span class="ago">Open →</span></a>
+      <a class="acard rv" href="#il-mondo"><span class="an">03</span><b>The World Islands</b><span class="ad">How an offshore world works, and why it lasts.</span><span class="ago">Open →</span></a>
+      <a class="acard rv" href="#il-concetto"><span class="an">04</span><b>The Concept</b><span class="ad">An island shaped like the Trident's promise.</span><span class="ago">Open →</span></a>
+      <a class="acard rv" href="#l-isola"><span class="an">05</span><b>The Project</b><span class="ad">Now, the island itself.</span><span class="ago">Open →</span></a>
+      <a class="acard rv" href="#il-valore"><span class="an">06</span><b>Prices &amp; Payment</b><span class="ad">What it takes to belong.</span><span class="ago">Open →</span></a>
+      <a class="acard rv" href="#il-finale"><span class="an">07</span><b>The Finale</b><span class="ad">Leggerezza. Luminosità. Vitalità.</span><span class="ago">Open →</span></a>
     </div>
   </div>
 </section>
 
+<a class="nextup" href="#il-costruttore" data-next="il-costruttore"><small>Next chapter · 01</small><b>The Developer</b><span>Keep scrolling, drag or tap to continue</span><div class="bar3"><i></i></div></a>
 </div>
 
-<div class="page" id="the-developer">
-<!-- CHAPTER 01: THE DEVELOPER -->
-<section class="chapter" id="ch-developer">
-  <div class="wrap"><span class="cnum rv">01</span><h2 class="rv d1">The Developer</h2><span class="dash rv d2"></span>
-  <p class="rv d2 narrow" style="margin:0 auto">SAMANA Developers and its new premium brand, SAMANA COLLECTA.</p></div>
+<div class="page" id="il-costruttore">
+<section class="vhero">
+  <div class="vbg"><video class="ptv" autoplay muted loop playsinline preload="metadata" poster="img/hero-island.webp"><source data-wide="img/hero-island-w.mp4" data-tall="img/hero-island.mp4" src="img/hero-island.mp4" type="video/mp4"></video></div>
+  <div class="vtx"><p class="k rv">Chapter 01</p><h1 class="rv d1">The Developer</h1><p class="it rv d1">Il Costruttore</p></div>
+  <div class="vlead rv d2"><span class="dash"></span><p>SAMANA Group: the developer behind Maserati Island, and SAMANA COLLECTA, its new premium brand for lifestyle-led destinations.</p></div>
+  <div class="vctl"><button class="vpause" aria-label="Pause film"><svg width="12" height="12" viewBox="0 0 14 14"><path d="M4 2v10M10 2v10" stroke="currentColor" stroke-width="1.3"/></svg></button><button class="vsnd" aria-label="Sound on"><svg width="14" height="14" viewBox="0 0 16 16"><path d="M2 6h3l4-3v10l-4-3H2z" fill="none" stroke="currentColor" stroke-width="1.2"/><path class="w" d="M11.5 5.5c1 1.4 1 3.6 0 5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button></div>
 </section>
-
+<section class="overview" id="ov-il-costruttore">
+  <div class="ovgrid"><div><span class="dash rv"></span><p class="ovk rv">Who builds it</p><h2 class="rv d1">Every island needs a builder the market trusts.</h2></div>
+  <p class="ovtxt wordfill">SAMANA Group has been building in Dubai since 1996 and ranked fifth among the city's off-plan developers in 2025. SAMANA COLLECTA is its new premium brand, created for lifestyle-led destinations like this one.</p></div>
+  <div class="ovimgs one"><figure class="ovimg rv d0"><img src="img/dev.webp" alt="" loading="lazy"></figure></div>
+</section>
+<section id="fifth" style="padding-top:0">
+  <div class="fifth rv">
+    <div class="big">5<sup>th</sup></div>
+    <div><h3>Largest off-plan developer in Dubai</h3>
+    <p>SAMANA Group ranked as the fifth highest-selling off-plan developer in Dubai for 2025, recording AED 7.1 billion (USD 1.93 billion) in gross sales, up 31% on 2024.</p>
+    <small>Source: Property Monitor and the Bayut annual report, 2025</small></div>
+  </div>
+</section>
 <!-- DEVELOPER -->
 <section id="developer">
   <div class="wrap">
     <div class="center">
       <span class="dash rv"></span>
-      <h2 class="rv">SAMANA. Since 1996.</h2>
+      <h2 class="rv">SAMANA Group. Since 1996.</h2>
       <p class="rv d1 narrow">A developer that delivers: resort-style living, 1% payment plans, proven capital gains and selected premium international brands.</p>
     </div>
     <div class="stats">
       <div class="rv"><b>5th</b><span>Largest property developer for off-plan</span></div>
       <div class="rv d1"><b>55+</b><span>Projects launched to date</span></div>
       <div class="rv d2"><b>1,300+</b><span>Units handed over since 2017</span></div>
-      <div class="rv"><b>USD 1.9B</b><span>Gross sales in 2025, from 13 launches</span></div>
+      <div class="rv"><b>USD 1.9B</b><span>Gross sales in 2025 (AED 7.1 billion)</span></div>
       <div class="rv d1"><b>17</b><span>Handovers scheduled: 6 in 2026, 11 in 2027</span></div>
       <div class="rv d2"><b>14</b><span>Locations to choose from across Dubai</span></div>
     </div>
@@ -625,7 +927,7 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
 <section id="collecta">
   <div class="wrap narrow">
     <span class="dash rv"></span>
-    <p class="rv d1" style="font-size:clamp(17px,1.5vw,21px)">SAMANA COLLECTA is the premium, lifestyle-led brand of SAMANA Developers, launched in October 2026. Its philosophy is life first: each location is chosen for the life it enables, and each partner for the culture and refinement they bring. Maserati Island is the first project to embody it.</p>
+    <p class="rv d1 wordfill" style="font-size:clamp(20px,2vw,28px);line-height:1.45;font-weight:300">SAMANA COLLECTA is the premium, lifestyle-led brand of SAMANA Group, launched in October 2026. Its philosophy is life first: each location is chosen for the life it enables, and each partner for the culture and refinement they bring. Maserati Island is the first project to embody it.</p>
     <p class="quote rv d2">“Because life sets the standard.”<small>Imran Farooq, CEO</small></p>
   </div>
 </section>
@@ -636,7 +938,7 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
     <div class="center"><span class="dash rv"></span><h2 class="rv">What makes a luxury buyer say yes</h2>
     <p class="lede rv d1">It's never about the ability to pay.<br>It's always about the desire to pay.</p></div>
     <div class="say">
-      <div class="row rv"><span class="k">Identity</span><span class="q">“This home says who I am.”</span><span class="v">Like-minded people will be living on this island: their wavelength and vibe will be a perfect match.</span></div>
+      <div class="row rv"><span class="k">Identity</span><span class="q">“This home says who I am.”</span><span class="v">The island is shared with like-minded people who live the same way.</span></div>
       <div class="row rv"><span class="k">Rarity</span><span class="q">“Few people will ever own this.”</span><span class="v">849 homes on one private island. Only 7 water villas and 2 tree villas.</span></div>
       <div class="row rv"><span class="k">Popularity</span><span class="q">“The smart money is already there.”</span><span class="v">Amali and Zuha villas sold at AED 68–220M. One&amp;Only and Ritz-Carlton committed.</span></div>
       <div class="row rv"><span class="k">Exclusivity</span><span class="q">“Not everyone can get in.”</span><span class="v">Boat-only, resident-only access, plus founding member status at launch.</span></div>
@@ -644,18 +946,56 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
   </div>
 </section>
 
+<a class="nextup" href="#la-firma" data-next="la-firma"><small>Next chapter · 02</small><b>The Signing</b><span>Keep scrolling, drag or tap to continue</span><div class="bar3"><i></i></div></a>
 </div>
 
-<div class="page" id="the-world-island">
-<!-- CHAPTER 02: THE WORLD ISLAND -->
-<section class="chapter" id="ch-world">
-  <div class="wrap"><span class="cnum rv">02</span><h2 class="rv d1">The World Island</h2><span class="dash rv d2"></span>
-  <p class="rv d2 narrow" style="margin:0 auto">How do people live on an island? A man-made world off Dubai's coast, and no longer a dream: it is being built now.</p></div>
+<div class="page" id="la-firma">
+<section class="vhero">
+  <div class="vbg"><img class="kb" src="img/lv-012-007.webp" alt="Maserati at dusk" style="object-position:center"></div>
+  <div class="vtx"><p class="k rv">Chapter 02</p><h1 class="rv d1">The Signing</h1><p class="it rv d1">La Firma</p></div>
+  <div class="vlead rv d2"><span class="dash"></span><p>The agreement that brought the Trident to The World Islands: Maserati and SAMANA COLLECTA unveil the first Maserati residential living destination.</p></div>
+  
+</section>
+<section class="overview" id="ov-la-firma">
+  <div class="ovgrid"><div><span class="dash rv"></span><p class="ovk rv">The partnership</p><h2 class="rv d1">The Trident comes home to the water.</h2></div>
+  <p class="ovtxt wordfill">SAMANA COLLECTA and Maserati signed the agreement that created Maserati Island: the first Maserati residential living destination anywhere, with interiors designed by Maserati.</p></div>
+  <div class="ovimgs one"><figure class="ovimg rv d0"><img src="img/lv-007-000.webp" alt="" loading="lazy"></figure></div>
+</section>
+<section id="signing" style="padding-top:0">
+  <div class="article">
+    <p class="meta rv">Dubai · November 2026</p>
+    <h2 class="rv">Maserati and SAMANA COLLECTA unveil Maserati Island</h2>
+    <p class="dropcap rv d1">Maserati and SAMANA COLLECTA, the new ultra-premium real estate brand of SAMANA Group, have unveiled Maserati Island: a flagship destination on The World Islands, Dubai, and the first Maserati residential living destination in the world.</p>
+    <p class="rv">The agreement was signed by Imran Farooq, CEO of SAMANA Group, and Santo Ficili, CEO of Alfa Romeo and Maserati. The island is designed to be lived in all year round, through the identity of the Trident.</p>
+    <figure class="rv"><img src="img/signing.webp" alt="The signing of the Maserati Island agreement"><figcaption>Imran Farooq, CEO of SAMANA Group (left), and Santo Ficili, CEO of Alfa Romeo and Maserati (right), signing the agreement for Maserati Island.</figcaption></figure>
+    <p class="rv">For Maserati, the project arrives in the year the Trident emblem celebrates its 100th anniversary. The brand describes Maserati Island as one of the first expressions of Casa Maserati: its identity carried from the road into the living space.</p>
+    <blockquote class="rv">“One of the first tangible expressions of Casa Maserati.”<cite>Cristiano Fiorio, Maserati Chief Marketing Officer</cite></blockquote>
+    <p class="rv">The branded residences, with amenities inspired by the Italian Riviera, are set to be ready starting 2030.</p>
+    <div class="roles rv">
+      <div><b>SAMANA COLLECTA</b><span>The developer's premium brand. Builds the island, its utilities and its boats.</span></div>
+      <div><b>Maserati</b><span>Interior design of the residences and the supply of certain Maserati products.</span></div>
+      <div><b>Owners</b><span>Membership of the Maserati Island Owners Club UAE: drives, events, getaways and VIP passes.</span></div>
+    </div>
+  </div>
+</section>
+<a class="nextup" href="#il-mondo" data-next="il-mondo"><small>Next chapter · 03</small><b>The World Islands</b><span>Keep scrolling, drag or tap to continue</span><div class="bar3"><i></i></div></a>
+</div>
+
+<div class="page" id="il-mondo">
+<section class="vhero">
+  <div class="vbg"><video class="ptv" autoplay muted loop playsinline preload="metadata" poster="img/hero-yacht.webp"><source data-wide="img/hero-yacht-w.mp4" data-tall="img/hero-yacht.mp4" src="img/hero-yacht.mp4" type="video/mp4"></video></div>
+  <div class="vtx"><p class="k rv">Chapter 03</p><h1 class="rv d1">The World Islands</h1><p class="it rv d1">Il Mondo</p></div>
+  <div class="vlead rv d2"><span class="dash"></span><p>How do people live on an island? A man-made world off Dubai's coast, no longer a dream: it is being built now. </p></div>
+  <div class="vctl"><button class="vpause" aria-label="Pause film"><svg width="12" height="12" viewBox="0 0 14 14"><path d="M4 2v10M10 2v10" stroke="currentColor" stroke-width="1.3"/></svg></button><button class="vsnd" aria-label="Sound on"><svg width="14" height="14" viewBox="0 0 16 16"><path d="M2 6h3l4-3v10l-4-3H2z" fill="none" stroke="currentColor" stroke-width="1.2"/><path class="w" d="M11.5 5.5c1 1.4 1 3.6 0 5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button></div>
+</section>
+<section class="overview" id="ov-il-mondo">
+  <div class="ovgrid"><div><span class="dash rv"></span><p class="ovk rv">Before the island, the world around it</p><h2 class="rv d1">How an offshore world works, and why it lasts.</h2></div>
+  <p class="ovtxt wordfill">The World is 300 man-made islands, protected by a 26 km breakwater and reached only by boat. Here is how life works offshore: power, water, waste and connectivity made and managed on the island, the company that runs it, and the neighbours already there.</p></div>
+  <div class="ovimgs one"><figure class="ovimg rv d0"><img src="img/world.webp" alt="" loading="lazy"></figure></div>
 </section>
 
-<section id="film" style="padding-top:0">
-  <div class="wrap"><div class="explain rv"><video controls playsinline preload="none" poster="img/world-explained.webp"><source src="img/world-explained.mp4" type="video/mp4"></video></div></div>
-</section>
+
+
 
 <section id="what">
   <div class="wrap split">
@@ -688,9 +1028,9 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
         <div class="rv d1"><b>26 km</b><span>Oval wall</span></div>
       </div>
       <ul class="lines rv d2">
-        <li><b>Stops big waves</b> — waves from the open sea hit the wall first and break there.</li>
-        <li><b>Protects the beaches</b> — keeps the sand and beaches from washing away.</li>
-        <li><b>Calmer water inside</b> — smoother and safer boat rides, even in rough weather.</li>
+        <li><b>Breaks the waves</b> — the open-sea swell meets the wall first.</li>
+        <li><b>Protects the beaches</b> — keeps the sand in place.</li>
+        <li><b>Calmer water inside</b> — smoother, safer crossings, even in rough weather.</li>
       </ul>
     </div>
   </div>
@@ -698,14 +1038,34 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
 
 <section id="island-life">
   <div class="wrap">
-    <div class="center"><span class="dash rv"></span><h2 class="rv">How life works on an island?</h2>
+    <div class="center"><span class="dash rv"></span><h2 class="rv">How life works on an island</h2>
     <p class="rv d1 narrow">Everything a home in the city has, made and managed on the island itself.</p></div>
     <div class="tiles">
-      <div class="rv"><svg viewBox="0 0 34 34"><path d="M19 3 7 19h8l-2 12 12-16h-8l2-12z"/></svg><b>Electricity</b><span>Power for lights, AC and appliances, made on the island.</span></div>
-      <div class="rv d1"><svg viewBox="0 0 34 34"><path d="M17 4c5 7 9 12 9 17a9 9 0 0 1-18 0c0-5 4-10 9-17z"/></svg><b>Water</b><span>Cleaned and supplied on the island.</span></div>
-      <div class="rv d2"><svg viewBox="0 0 34 34"><path d="M8 13a10 10 0 0 1 17-4M26 21a10 10 0 0 1-17 4M25 4v5h-5M9 30v-5h5"/></svg><b>Sewage</b><span>Dirty water treated on the island.</span></div>
-      <div class="rv"><svg viewBox="0 0 34 34"><path d="M8 10h18M13 10V6h8v4M10 10l1.5 18h11L24 10"/></svg><b>Waste</b><span>Trash collected and taken to the mainland by boat.</span></div>
-      <div class="rv d1"><svg viewBox="0 0 34 34"><circle cx="17" cy="17" r="12"/><path d="M5 17h24M17 5c4 4 4 20 0 24M17 5c-4 4-4 20 0 24"/></svg><b>Internet</b><span>Built in by SAMANA.</span></div>
+      <div class="rv"><svg viewBox="0 0 34 34"><path d="M19 3 7 19h8l-2 12 12-16h-8l2-12z"/></svg><b>Electricity</b><span>Generated on the island for lighting, cooling and appliances.</span></div>
+      <div class="rv d1"><svg viewBox="0 0 34 34"><path d="M17 4c5 7 9 12 9 17a9 9 0 0 1-18 0c0-5 4-10 9-17z"/></svg><b>Water</b><span>Treated and supplied on the island.</span></div>
+      <div class="rv d2"><svg viewBox="0 0 34 34"><path d="M8 13a10 10 0 0 1 17-4M26 21a10 10 0 0 1-17 4M25 4v5h-5M9 30v-5h5"/></svg><b>Sewage</b><span>Treated on the island.</span></div>
+      <div class="rv"><svg viewBox="0 0 34 34"><path d="M8 10h18M13 10V6h8v4M10 10l1.5 18h11L24 10"/></svg><b>Waste</b><span>Collected and taken to the mainland by boat.</span></div>
+      <div class="rv d1"><svg viewBox="0 0 34 34"><circle cx="17" cy="17" r="12"/><path d="M5 17h24M17 5c4 4 4 20 0 24M17 5c-4 4-4 20 0 24"/></svg><b>Internet</b><span>Built in by SAMANA COLLECTA.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="built" style="padding-top:0">
+  <div class="wrap">
+    <div class="center"><h2 class="rv">How SAMANA COLLECTA runs the island</h2></div>
+    <div class="tiles four">
+      <div class="rv"><svg viewBox="0 0 34 34"><path d="M19 3 7 19h8l-2 12 12-16h-8l2-12z"/></svg><b>All utilities by SAMANA COLLECTA</b><span>Power, water, sewage and communications.</span></div>
+      <div class="rv d1"><svg viewBox="0 0 34 34"><path d="M17 4l11 4v8c0 7-5 12-11 14C11 28 6 23 6 16V8z"/></svg><b>DEWA standards</b><span>The same quality as the city.</span></div>
+      <div class="rv d2"><svg viewBox="0 0 34 34"><rect x="5" y="11" width="22" height="12" rx="2"/><path d="M27 15h2v4h-2M10 15v4M14 15v4"/></svg><b>Backup systems</b><span>For power, water and communications.</span></div>
+      <div class="rv d3"><svg viewBox="0 0 34 34"><path d="M9 4h12l5 5v21H9zM21 4v5h5M13 17l3 3 6-6"/></svg><b>No utilities, no handover</b><span>No completion certificate without them: the buyer is protected.</span></div>
+    </div>
+    <div class="split" style="margin-top:clamp(60px,10vh,110px)">
+      <div class="media rv"><img src="img/yacht.webp" alt="SAMANA COLLECTA yacht crossing"></div>
+      <div>
+        <span class="dash rv"></span>
+        <h2 class="rv">SAMANA COLLECTA runs the boats</h2>
+        <p class="rv d1">No outside company is needed to get home. Two boats run every 30 minutes until 8 pm, then one boat until midnight, with an emergency boat on demand. Residents board from several mainland marinas and are home in 15 to 25 minutes.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -714,7 +1074,7 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
   <div class="wrap split">
     <div>
       <span class="dash rv"></span>
-      <h2 class="rv">Who are the neighbours?</h2>
+      <h2 class="rv">The neighbours</h2>
       <p class="rv d1">The World is no longer a dream: it is being built now.</p>
       <ul class="lines rv d2">
         <li><b>Hotels open</b> — already operating on the islands.</li>
@@ -727,14 +1087,60 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
   </div>
 </section>
 
+<a class="nextup" href="#il-concetto" data-next="il-concetto"><small>Next chapter · 04</small><b>The Concept</b><span>Keep scrolling, drag or tap to continue</span><div class="bar3"><i></i></div></a>
 </div>
 
-<div class="page" id="living-there">
-<!-- CHAPTER 03: LIVING THERE -->
-<section class="chapter" id="ch-living">
-  <div class="wrap"><span class="cnum rv">03</span><h2 class="rv d1">Living There</h2><span class="dash rv d2"></span>
-  <p class="rv d2 narrow" style="margin:0 auto">The first private Maserati Island in the world. A world never built before. A world worth belonging to.</p></div>
+<div class="page" id="il-concetto">
+<section class="vhero">
+  <div class="vbg"><video class="ptv" autoplay muted loop playsinline preload="metadata" poster="img/intro-last.webp"><source data-wide="img/intro-film-w.mp4" data-tall="img/intro-film.mp4" src="img/intro-film.mp4" type="video/mp4"></video></div>
+  <div class="vtx"><p class="k rv">Chapter 04</p><h1 class="rv d1">The Concept</h1><p class="it rv d1">Il Concetto</p></div>
+  <div class="vlead rv d2"><span class="dash"></span><p>Before the renders, there was a sketchbook. How the island took its shape, and how SAMANA COLLECTA found its name.</p></div>
 </section>
+<section class="overview" id="ov-il-concetto">
+  <div class="ovgrid"><div><span class="dash rv"></span><p class="ovk rv">From a sketch to an icon</p><h2 class="rv d1">An island shaped like the Trident's promise.</h2></div>
+  <p class="ovtxt wordfill">Maserati Island began as a drawing: an island in open water, a green heart at its centre, and wings that open to the sea like petals. Here is how the shape of the island, and the name SAMANA COLLECTA, came to be.</p></div>
+  <div class="ovimgs one"><figure class="ovimg rv d0 paper"><img src="img/sketch-4.webp" alt="" loading="lazy"></figure></div>
+</section>
+
+<section id="form-evolution">
+  <div class="wrap">
+    <div class="center"><span class="dash rv"></span><h2 class="rv">Concept form evolution</h2>
+    <p class="rv d1 narrow">From island geometry to an iconic marine resort, in six steps.</p></div>
+    <div class="csteps"><figure class="cstep rvimg rv"><img src="img/evo-1.webp" alt="Site inspiration sketch" loading="lazy"><figcaption><i>01</i><b>Site inspiration</b><span>An island in open water: its outline and natural shoreline studied.</span></figcaption></figure><figure class="cstep rvimg rv"><img src="img/evo-2.webp" alt="Central oasis sketch" loading="lazy"><figcaption><i>02</i><b>Central oasis</b><span>A communal core established at the social and landscape heart of the island.</span></figcaption></figure><figure class="cstep rvimg rv"><img src="img/evo-3.webp" alt="Radial organisation sketch" loading="lazy"><figcaption><i>03</i><b>Radial organisation</b><span>Circulation and view corridors radiate outward from the centre, like a star or a flower.</span></figcaption></figure><figure class="cstep rvimg rv"><img src="img/evo-4.webp" alt="Built wings emerge sketch" loading="lazy"><figcaption><i>04</i><b>Built wings emerge</b><span>Six to seven curved built masses placed like yacht-inspired petals, each turned to the sea.</span></figcaption></figure><figure class="cstep rvimg rv"><img src="img/evo-5.webp" alt="Softening and sculpting sketch" loading="lazy"><figcaption><i>05</i><b>Softening and sculpting</b><span>The wings become fluid, terraced and organic, with beaches, pools and overwater elements.</span></figcaption></figure><figure class="cstep rvimg rv"><img src="img/evo-6.webp" alt="Final composition sketch" loading="lazy"><figcaption><i>06</i><b>Final composition</b><span>The full island form resolved: the iconic radial arrangement, with a luxury marine character.</span></figcaption></figure></div>
+  </div>
+</section>
+
+<section id="the-name">
+  <div class="wrap">
+    <div class="center"><span class="dash rv"></span><h2 class="rv">From Collection to Collecta</h2>
+    <p class="rv d1 narrow wordfill" style="font-size:clamp(18px,1.8vw,24px);line-height:1.5">It began as a collection of projects, identity and legacy. Then the name was simplified, given an architectural A, and balanced into one identity.</p></div>
+    <div class="csteps"><figure class="cstep rvimg rv"><img src="img/name-1.webp" alt="The original idea" loading="lazy"><figcaption><i>01</i><b>The original idea</b><span>Projects, identity, legacy.</span></figcaption></figure><figure class="cstep rvimg rv"><img src="img/name-2.webp" alt="Simplifying the name" loading="lazy"><figcaption><i>02</i><b>Simplifying the name</b><span>Less is more.</span></figcaption></figure><figure class="cstep rvimg rv"><img src="img/name-3.webp" alt="The transformation" loading="lazy"><figcaption><i>03</i><b>The transformation</b><span>Collecta: more distinctive, more elegant.</span></figcaption></figure><figure class="cstep rvimg rv"><img src="img/name-4.webp" alt="The architectural letters" loading="lazy"><figcaption><i>04</i><b>The architectural letters</b><span>Drawn like architecture, with timeless proportions.</span></figcaption></figure><figure class="cstep rvimg rv"><img src="img/name-5.webp" alt="The brand composition" loading="lazy"><figcaption><i>05</i><b>The brand composition</b><span>Two words in balance and harmony.</span></figcaption></figure><figure class="cstep rvimg rv"><img src="img/name-6.webp" alt="The final identity" loading="lazy"><figcaption><i>06</i><b>The final identity</b><span>From Collection to Collecta.</span></figcaption></figure></div>
+  </div>
+</section>
+
+<section id="sketchbook" style="padding-top:0">
+  <div class="wrap">
+    <div class="center"><span class="dash rv"></span><h2 class="rv">The sketchbook</h2>
+    <p class="rv d1 narrow">Drag through the original concept sketches. Tap one to open it full-screen.</p></div>
+  </div>
+  <div class="sketchrow rv" id="sketchrow"><button class="sk" data-src="img/sketch-4.webp"><img src="img/sketch-4.webp" alt="Coastal resort, concept sketch" loading="lazy"><span>Coastal resort, concept sketch</span></button><button class="sk" data-src="img/sketch-1.webp"><img src="img/sketch-1.webp" alt="Terraces, beach and lagoon" loading="lazy"><span>Terraces, beach and lagoon</span></button><button class="sk" data-src="img/sketch-2.webp"><img src="img/sketch-2.webp" alt="Aerial, rear and interior views" loading="lazy"><span>Aerial, rear and interior views</span></button><button class="sk" data-src="img/sketch-5.webp"><img src="img/sketch-5.webp" alt="Floating house, elevations and section" loading="lazy"><span>Floating house, elevations and section</span></button><button class="sk" data-src="img/sketch-6.webp"><img src="img/sketch-6.webp" alt="Arriving by boat" loading="lazy"><span>Arriving by boat</span></button><button class="sk" data-src="img/sketch-7.webp"><img src="img/sketch-7.webp" alt="Concept form evolution" loading="lazy"><span>Concept form evolution</span></button><button class="sk" data-src="img/sketch-8.webp"><img src="img/sketch-8.webp" alt="From Collection to Collecta" loading="lazy"><span>From Collection to Collecta</span></button></div>
+</section>
+<a class="nextup" href="#l-isola" data-next="l-isola"><small>Next chapter · 05</small><b>The Project</b><span>Keep scrolling, drag or tap to continue</span><div class="bar3"><i></i></div></a>
+</div>
+
+<div class="page" id="l-isola">
+<section class="vhero">
+  <div class="vbg"><video class="ptv" autoplay muted loop playsinline preload="metadata" poster="img/hero-home.webp"><source data-wide="img/hero-home-w.mp4" data-tall="img/hero-home.mp4" src="img/hero-home.mp4" type="video/mp4"></video></div>
+  <div class="vtx"><p class="k rv">Chapter 05</p><h1 class="rv d1">The Project</h1><p class="it rv d1">L'Isola</p></div>
+  <div class="vlead rv d2"><span class="dash"></span><p>The first private Maserati Island in the world: its location, the project, every layout with its floor plan, and how SAMANA COLLECTA runs it.</p></div>
+  <div class="vctl"><button class="vpause" aria-label="Pause film"><svg width="12" height="12" viewBox="0 0 14 14"><path d="M4 2v10M10 2v10" stroke="currentColor" stroke-width="1.3"/></svg></button><button class="vsnd" aria-label="Sound on"><svg width="14" height="14" viewBox="0 0 16 16"><path d="M2 6h3l4-3v10l-4-3H2z" fill="none" stroke="currentColor" stroke-width="1.2"/><path class="w" d="M11.5 5.5c1 1.4 1 3.6 0 5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button></div>
+</section>
+<section class="overview" id="ov-l-isola">
+  <div class="ovgrid"><div><span class="dash rv"></span><p class="ovk rv">The project</p><h2 class="rv d1">Now, the island itself.</h2></div>
+  <p class="ovtxt wordfill">Where it is, what is being built, and every way to live there, from the Barchetta suite to the Villa Mare on the water. Explore each layout and its floor plan.</p></div>
+  <div class="ovimgs one"><figure class="ovimg rv d0"><img src="img/project.webp" alt="" loading="lazy"></figure></div>
+</section>
+
 
 <section id="location" style="padding-top:0">
   <div class="wrap">
@@ -819,43 +1225,59 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
 </section>
 
 
+
+
+
+<a class="nextup" href="#il-valore" data-next="il-valore"><small>Next chapter · 06</small><b>Prices &amp; Payment</b><span>Keep scrolling, drag or tap to continue</span><div class="bar3"><i></i></div></a>
 </div>
 
-<div class="page" id="built-to-last">
-<!-- CHAPTER 04: BUILT TO LAST -->
-<section class="chapter" id="ch-built">
-  <div class="wrap"><span class="cnum rv">04</span><h2 class="rv d1">Built to Last</h2><span class="dash rv d2"></span>
-  <p class="rv d2 narrow" style="margin:0 auto">The island is built and run by SAMANA, so residents never depend on anyone else to get home.</p></div>
+<div class="page" id="il-valore">
+<section class="vhero">
+  <div class="vbg"><img class="kb" src="img/pp-interior.webp" alt="Residence living room facing the Dubai skyline" style="object-position:center"></div>
+  <div class="vtx"><p class="k rv">Chapter 06</p><h1 class="rv d1">Prices &amp; Payment</h1><p class="it rv d1">Il Valore</p></div>
+  <div class="vlead rv d2"><span class="dash"></span><p>Starting prices, the 50 / 50 payment plan, how Maserati Island compares with the islands around it, and the questions buyers ask.</p></div>
+  
+</section>
+<section class="overview" id="ov-il-valore">
+  <div class="ovgrid"><div><span class="dash rv"></span><p class="ovk rv">The investment</p><h2 class="rv d1">What it takes to belong.</h2></div>
+  <p class="ovtxt wordfill">Starting prices from AED 1.5 million, a 50/50 payment plan, and how Maserati Island compares with the islands around it, followed by the questions buyers ask most.</p></div>
+  <div class="ovimgs one"><figure class="ovimg rv d0"><img src="img/pp-interior.webp" alt="" loading="lazy"></figure></div>
+</section>
+<section id="prices">
+  <div class="pricebox">
+    <div class="big2 rv">Extraordinary<br>island living.</div>
+    <div class="every rv d1">Every day.</div>
+    <p class="sf rv">Starting from</p>
+    <div class="pgrid rv d1">
+      <div><h4>SUITE</h4><span class="aed">AED</span><span class="m">1.5M</span><small>468 sq ft</small></div>
+      <div><h4>1 BEDROOM</h4><span class="aed">AED</span><span class="m">2.1M</span><small>722 sq ft</small></div>
+      <div><h4>2 BEDROOM</h4><span class="aed">AED</span><span class="m">3.8M</span><small>1,405 sq ft</small></div>
+      <div><h4>3 BEDROOM</h4><span class="aed">AED</span><span class="m">6.5M</span><small>2,315 sq ft</small></div>
+    </div>
+    <div class="four rv"><h4>4 BEDROOM RESIDENCES</h4><span>PRICE ON REQUEST.</span></div>
+    <a class="cta2 rv" href="#layouts">Discover your island home.</a>
+  </div>
+  <div class="priceimg rv"><img src="img/pr-terrace.webp" alt="Terrace view over the island pool and the sea"></div>
 </section>
 
-<section id="built" style="padding-top:0">
-  <div class="wrap">
-    <div class="center"><h2 class="rv">How SAMANA runs the island?</h2></div>
-    <div class="tiles four">
-      <div class="rv"><svg viewBox="0 0 34 34"><path d="M19 3 7 19h8l-2 12 12-16h-8l2-12z"/></svg><b>All utilities by SAMANA</b><span>Power, water, sewage and communications.</span></div>
-      <div class="rv d1"><svg viewBox="0 0 34 34"><path d="M17 4l11 4v8c0 7-5 12-11 14C11 28 6 23 6 16V8z"/></svg><b>DEWA standards</b><span>The same quality as the city.</span></div>
-      <div class="rv d2"><svg viewBox="0 0 34 34"><rect x="5" y="11" width="22" height="12" rx="2"/><path d="M27 15h2v4h-2M10 15v4M14 15v4"/></svg><b>Backup systems</b><span>For power, water and communications.</span></div>
-      <div class="rv d3"><svg viewBox="0 0 34 34"><path d="M9 4h12l5 5v21H9zM21 4v5h5M13 17l3 3 6-6"/></svg><b>No utilities, no handover</b><span>No completion certificate without them: the buyer is protected.</span></div>
+<section id="payment">
+  <div class="plan2">
+    <div class="ttl rv">The freedom to<br>live beautifully.</div>
+    <p class="pp rv">Payment plan</p>
+    <div class="split50 rv"><div><b>50%</b><span>Pre-handover</span></div><div><b>50%</b><span>Post-handover</span></div></div>
+    <h5 class="rv">Before handover</h5>
+    <div class="tl rv">
+      <div><b>10%</b><i></i><span>Down<br>payment</span></div>
+      <div><b>5%</b><i></i><span>2nd<br>month</span></div><div><b>5%</b><i></i><span>6th<br>month</span></div><div><b>5%</b><i></i><span>12th<br>month</span></div>
+      <div><b>5%</b><i></i><span>18th<br>month</span></div><div><b>5%</b><i></i><span>24th<br>month</span></div><div><b>5%</b><i></i><span>30th<br>month</span></div>
+      <div><b>5%</b><i></i><span>36th<br>month</span></div><div><b>5%</b><i></i><span>42nd<br>month</span></div>
     </div>
-    <div class="split" style="margin-top:clamp(60px,10vh,110px)">
-      <div class="media rv"><img src="img/yacht.webp" alt="SAMANA yacht crossing"></div>
-      <div>
-        <span class="dash rv"></span>
-        <h2 class="rv">SAMANA runs the boats</h2>
-        <p class="rv d1">No outside company is needed to get home. Two boats run every 30 minutes until 8 pm, then one boat until midnight, with an emergency boat on demand. Residents board from several mainland marinas and are home in 15 to 25 minutes.</p>
-      </div>
-    </div>
+    <h5 class="rv">After handover</h5>
+    <div class="after rv"><span class="num">2%</span><span class="x">× 25 months</span></div>
+    <div class="dots rv" id="dots25"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   </div>
 </section>
 
-</div>
-
-<div class="page" id="the-investment">
-<!-- CHAPTER 05: THE INVESTMENT -->
-<section class="chapter" id="ch-investment">
-  <div class="wrap"><span class="cnum rv">05</span><h2 class="rv d1">The Investment</h2><span class="dash rv d2"></span>
-  <p class="rv d2 narrow" style="margin:0 auto">How Maserati Island compares, and the questions buyers ask.</p></div>
-</section>
 
 <!-- COMPARE -->
 <section id="compare">
@@ -888,7 +1310,7 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
     <div class="qa on" data-g="0">
       <details><summary><i>01</i>The World was announced 20+ years ago. Why will it work now?</summary><p class="ans">It is no longer a vision: hotels operate, several developers are building at once, and Amali and Zuha villas have registered at AED 68–220 million. One&amp;Only and Ritz-Carlton have committed.</p></details>
       <details><summary><i>02</i>Why not simply buy on Palm Jumeirah?</summary><p class="ans">Compare like with like. Palm super-branded homes trade at AED 7,000–8,500 per sq ft and The Heart of Europe at 5,000–6,500. Maserati Island launches below both, with a global brand and a private island.</p></details>
-      <details><summary><i>03</i>What if the neighbouring islands stay undeveloped?</summary><p class="ans">Value is anchored inside our island: SAMANA builds the utilities and runs the boats, Nakheel maintains the breakwater. Every island that develops adds amenities; every one that doesn't keeps supply scarce.</p></details>
+      <details><summary><i>03</i>What if the neighbouring islands stay undeveloped?</summary><p class="ans">Value is anchored inside our island: SAMANA COLLECTA builds the utilities and runs the boats, Nakheel maintains the breakwater. Every island that develops adds amenities; every one that doesn't keeps supply scarce.</p></details>
       <details><summary><i>04</i>Will it feel like a real community?</summary><p class="ans">Yes. More than 80 amenities, an island market, pharmacy, clinic and banking point, plus residents' lounge and events. Belonging is built in through the Owners Club.</p></details>
     </div>
     <div class="qa" data-g="1">
@@ -898,23 +1320,71 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
       <details><summary><i>08</i>What about healthcare and schools?</summary><p class="ans">An island clinic with a paramedic, a pet clinic and an emergency boat on demand. Schools in Jumeirah are about 20 minutes away.</p></details>
     </div>
     <div class="qa" data-g="2">
-      <details><summary><i>09</i>Why trust SAMANA with an offshore project?</summary><p class="ans">55+ projects launched, top five by off-plan sales volume, 1,300+ units handed over since 2017. Every payment sits in a RERA-regulated escrow account, released against certified progress.</p></details>
-      <details><summary><i>10</i>Who provides power, water and utilities?</summary><p class="ans">SAMANA builds all island utilities to DEWA and authority standards, with backup power, water and communications. No completion certificate is issued without them.</p></details>
-      <details><summary><i>11</i>Is Maserati the developer?</summary><p class="ans">No. SAMANA is the developer. Maserati's involvement centres on the interior design and the supply of certain Maserati products. Refer contract questions on the brand agreement to management.</p></details>
+      <details><summary><i>09</i>Why trust SAMANA Group with an offshore project?</summary><p class="ans">55+ projects launched, top five by off-plan sales volume, 1,300+ units handed over since 2017. Every payment sits in a RERA-regulated escrow account, released against certified progress.</p></details>
+      <details><summary><i>10</i>Who provides power, water and utilities?</summary><p class="ans">SAMANA COLLECTA builds all island utilities to DEWA and authority standards, with backup power, water and communications. No completion certificate is issued without them.</p></details>
+      <details><summary><i>11</i>Is Maserati the developer?</summary><p class="ans">No. SAMANA Group is the developer, through SAMANA COLLECTA. Maserati's involvement centres on the interior design and the supply of certain Maserati products. Questions on the brand agreement are answered by the sales team.</p></details>
       <details><summary><i>12</i>What do owners get beyond the home?</summary><p class="ans">Membership of the Maserati Island Owners Club UAE: scenic drives, social events, weekend getaways, brand storytelling and VIP passes.</p></details>
     </div>
     <div class="qa" data-g="3">
       <details><summary><i>13</i>Can the price change if construction costs rise?</summary><p class="ans">No. The SPA price is fixed under Dubai's off-plan framework (Law 13/2008). Cost inflation is the developer's risk, not the buyer's.</p></details>
-      <details><summary><i>14</i>What return can you promise?</summary><p class="ans">None, and never promise one. Show the register instead: Dubai prime homes averaged AED 3,767 per sq ft in Q3 2025, up 8.4% year on year (Knight Frank).</p></details>
-      <details><summary><i>15</i>Who will rent these homes?</summary><p class="ans">Today, the resort-style short-stay guest who already fills island and Palm rentals; later, residents commuting to DIFC. Present it as a hospitality yield, not a long-lease yield.</p></details>
-      <details><summary><i>16</i>Can I resell before handover?</summary><p class="ans">Yes, by assigning the SPA: a developer NOC, then an Oqood transfer at a DLD trustee office, typically once 30% is paid. Position it as a five- to ten-year hold.</p></details>
+      <details><summary><i>14</i>What return can you promise?</summary><p class="ans">No return is promised. The market record speaks instead: Dubai prime homes averaged AED 3,767 per sq ft in Q3 2025, up 8.4% year on year (Knight Frank).</p></details>
+      <details><summary><i>15</i>Who will rent these homes?</summary><p class="ans">Today, the resort-style short-stay guest who already fills island and Palm rentals; later, residents commuting to DIFC. It is best seen as a hospitality yield rather than a long-lease yield.</p></details>
+      <details><summary><i>16</i>Can I resell before handover?</summary><p class="ans">Yes, by assigning the SPA: a developer NOC, then an Oqood transfer at a DLD trustee office, typically once 30% is paid. It is best suited to a five- to ten-year hold.</p></details>
     </div>
   </div>
 </section>
 
+<a class="nextup" href="#il-finale" data-next="il-finale"><small>Next chapter · 07</small><b>The Finale</b><span>Keep scrolling, drag or tap to continue</span><div class="bar3"><i></i></div></a>
 </div>
 
-<div id="zoom"><button>Close</button><img id="zoomImg" src="" alt="Floor plan enlarged"></div>
+<div class="page" id="il-finale">
+<section class="vhero">
+  <div class="vbg"><video class="ptv" autoplay muted loop playsinline preload="metadata" poster="img/hero-drive.webp"><source data-wide="img/hero-drive-w.mp4" data-tall="img/hero-drive.mp4" src="img/hero-drive.mp4" type="video/mp4"></video></div>
+  <div class="vtx"><p class="k rv">Chapter 07</p><h1 class="rv d1">The Finale</h1><p class="it rv d1">Il Finale</p></div>
+  <div class="vlead rv d2"><span class="dash"></span><p>Since 1914, the art of savouring the details. Now, for the first time, the Trident has a home on the water.</p></div>
+  
+  <div class="vctl"><button class="vpause" aria-label="Pause film"><svg width="12" height="12" viewBox="0 0 14 14"><path d="M4 2v10M10 2v10" stroke="currentColor" stroke-width="1.3"/></svg></button><button class="vsnd" aria-label="Sound on"><svg width="14" height="14" viewBox="0 0 16 16"><path d="M2 6h3l4-3v10l-4-3H2z" fill="none" stroke="currentColor" stroke-width="1.2"/><path class="w" d="M11.5 5.5c1 1.4 1 3.6 0 5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button></div>
+</section>
+<section class="overview" id="ov-il-finale">
+  <div class="ovgrid"><div><span class="dash rv"></span><p class="ovk rv">The finale</p><h2 class="rv d1">Leggerezza. Luminosità. Vitalità.</h2></div>
+  <p class="ovtxt wordfill">Since 1914 Maserati has stood for the art of savouring the details. Maserati Island is where that art finds a home on the water, and where we invite you to belong.</p></div>
+  <div class="ovimgs one"><figure class="ovimg rv d0"><img src="img/car.webp" alt="" loading="lazy"></figure></div>
+</section>
+<!-- MASERATI -->
+<section id="maserati">
+  <div class="wrap split flip">
+    <div class="media rv"><img src="img/car.webp" alt="Classic Maserati"><div class="small"><img src="img/trident.webp" alt="The Maserati Tridente"></div></div>
+    <div>
+      <span class="dash rv"></span>
+      <p class="ovk rv">Il Marchio</p>
+      <h2 class="rv">The brand comes home</h2>
+      <p class="rv d1">For more than a century Maserati has stood as a powerful symbol of culture, design and style. Of dolce vita itself: the art of savouring the details, the small things, the moments.</p>
+      <p class="rv d1" style="margin-top:16px">Since 1914, this has been the philosophy behind everything Maserati has created. Now it is finding its home on the water, in a private island and the world's first Maserati residences. And for the Tridente, which has marked every Maserati since 1926, the island is its natural home.</p>
+      <ul class="lines rv d2">
+        <li><b>This is the island of the Tridente.</b> It weaves the power of the sea with the form, the line and the proportion of a Maserati.</li>
+        <li><b>Interior design by Maserati</b>, with the supply of certain Maserati products. SAMANA Group is the developer.</li>
+        <li><b>Leggerezza. Luminosità. Vitalità.</b></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="center" style="margin-top:clamp(70px,12vh,140px)"><span class="dash rv"></span><h2 class="rv">La Dolce Vita</h2>
+    <p class="rv d1 narrow">You might find it in the feel of the leather steering wheel, the way a Maserati seems to glide effortlessly over the road. Or an aperitivo taken slowly at sunset. Sip by sip. No rush. Just a knowing appreciation of the moment.</p></div>
+    <div class="mosaic">
+      <figure class="big rvimg"><img src="img/lv-013-009.webp" alt="Maserati convertible by the sea" loading="lazy"></figure>
+      <figure class="rvimg"><img src="img/lv-013-010.webp" alt="Maserati leather seat" loading="lazy"></figure>
+      <figure class="tall rvimg"><img src="img/lv-012-007.webp" alt="Maserati at dusk" loading="lazy"></figure>
+      <figure class="rvimg"><img src="img/lv-013-011.webp" alt="Maserati cabin" loading="lazy"></figure>
+      <figure class="tall rvimg"><img src="img/lv-009-003.webp" alt="Neptune statue" loading="lazy"></figure>
+      <figure class="rvimg"><img src="img/lv-013-008.webp" alt="The Tridente" loading="lazy"></figure>
+      <figure class="big rvimg"><img src="img/lv-009-002.webp" alt="Sailing" loading="lazy"></figure>
+      <figure class="rvimg"><img src="img/lv-009-006.webp" alt="Sculpted detail" loading="lazy"></figure>
+      <figure class="rvimg"><img src="img/lv-007-000.webp" alt="Maserati Tridente on the bonnet" loading="lazy"></figure>
+      <figure class="rvimg"><img src="img/lv-014-013.webp" alt="Classic Maserati" loading="lazy"></figure>
+      <figure class="rvimg"><img src="img/lv-017-015.webp" alt="Maserati Island from the sea" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
 
 <!-- CLOSING: brochure end page -->
 <footer id="connect">
@@ -924,13 +1394,22 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
     <p class="addr rv d2">22nd Floor, Vision Tower, Business Bay,<br>Dubai, UAE, P.O Box 44026</p>
     <p class="web rv d2">www.samana-collecta.com</p>
     <img class="clogo rv d3" src="img/collecta-stack.png" alt="SAMANA COLLECTA">
-    <a class="toTop rv d3" href="#home">Back to home</a>
+    <a class="toTop rv d3" href="#la-brochure">Back to the start</a>
     <p class="legal">The involvement of Licensor in this Project is primarily related to the Residential Project Interiors design of the Residential Project and to the supply of certain Licensor products located within the Residential Project and Residential Unit (to the extent purchased by the end-user). In no circumstances is the owner of the Residential Unit authorised to use the Licensor Trademarks except as permitted under the terms of the Agreement and in accordance with the terms of their sale and purchase agreement with the Developer. Notwithstanding any general restrictions, Unit owners are authorized to utilize the Title for the purposes of selling, renting, or managing their Unit which will be subject to the end-user executing Owners Association undertaking to ensure compliance with the Licensor’s established CASA MASERATI Guidelines.</p>
   </div>
 </footer>
 
+</div>
+
+<div id="zoom"><button>Close</button><img id="zoomImg" src="" alt="Floor plan enlarged"></div>
+
 </main>
 
+<script>
+(function(){ const wide = innerWidth > innerHeight;
+  document.querySelectorAll('source[data-wide]').forEach(sc => { sc.src = wide ? sc.dataset.wide : sc.dataset.tall; const v = sc.parentNode; v.load && v.load(); });
+})();
+</script>
 <script>
 (() => {
   const HASH = '6a30e693085ee0b8faffbd489a826921f356f6190cb8e7bda131050f4bf91418';
@@ -949,8 +1428,29 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
     try{ sessionStorage.setItem('mi-ok','1'); }catch(e){}
     revealVisible();
   }
-  let ok=false; try{ ok = sessionStorage.getItem('mi-ok')==='1'; }catch(e){}
-  if(ok) unlock(true);
+  /* ---------- intro film: plays on the home page before the details ---------- */
+  function playFilm(){
+    const f = document.getElementById('introfilm'), v = document.getElementById('filmV');
+    if(!f || !v) return;
+    f.classList.remove('out','sea'); f.classList.add('on');
+    let done = false;
+    const end = () => { if(done) return; done = true; f.classList.add('out'); setTimeout(()=>{ f.classList.remove('on','out','sea'); v.pause(); }, 1150); };
+    v.currentTime = 0;
+    v.ontimeupdate = () => { if(v.currentTime > 2.4) f.classList.add('sea'); };
+    v.onended = () => setTimeout(end, 350);
+    v.onerror = end;
+    document.getElementById('filmSkip').onclick = end;
+    const tap = document.getElementById('filmTap');
+    const go = () => { tap.classList.remove('on'); const p2 = v.play(); p2 && p2.catch(()=>{}); setTimeout(end, 8000); };
+    tap.onclick = go;
+    const pr = v.play();
+    if(pr && pr.catch) pr.then(()=>setTimeout(end, 8000)).catch(()=>{ tap.classList.add('on'); });   // phone blocked autoplay (e.g. Low Power Mode) → one tap to play
+  }
+  window.playFilm = playFilm;
+  // The intro film opens the site automatically, before the code screen / home page
+  playFilm();
+  // the access code is asked every time the site is opened
+  try{ sessionStorage.removeItem('mi-ok'); }catch(e){}
   document.getElementById('gateForm').addEventListener('submit', async e => {
     e.preventDefault();
     const v = document.getElementById('code').value.trim().toUpperCase();
@@ -967,8 +1467,8 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
   /* ---------- header: dark over hero, frosted elsewhere ---------- */
   const hdr = document.getElementById('hdr'), hero = document.getElementById('hero');
   function onScroll(){
-    const ft = document.getElementById('connect').getBoundingClientRect().top;
-    const hb = hero.offsetParent ? hero.getBoundingClientRect().bottom : 0;
+    const fEl = document.getElementById('connect'); const ft = fEl && fEl.offsetParent ? fEl.getBoundingClientRect().top : 99999;
+    let topH = hero; try{ if(curPage) topH = curPage.querySelector('#hero, .vhero'); }catch(e){} const hb = topH && topH.offsetParent ? topH.getBoundingClientRect().bottom : 0;
     const over = hb > 120 || ft < 110;
     hdr.classList.toggle('dark', over); hdr.classList.toggle('solid', !over);
   }
@@ -985,10 +1485,10 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
   const pages=[...document.querySelectorAll('.page')], tabs=[...document.querySelectorAll('#agendaNav a')];
   let curPage=null;
   function route(){
-    const id = location.hash.slice(1) || 'home';
+    const id = location.hash.slice(1) || 'la-brochure';
     const el = document.getElementById(id);
     const pg = el ? (el.classList.contains('page') ? el : el.closest('.page')) : null;
-    const target = pg || document.getElementById('home');
+    const target = pg || document.getElementById('la-brochure');
     const changed = target !== curPage;
     if(changed){ pages.forEach(x=>x.classList.toggle('active', x===target)); curPage = target; }
     tabs.forEach(t=>t.classList.toggle('on', t.dataset.p===target.id));
@@ -1006,6 +1506,7 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
   addEventListener('hashchange', route);
   route();
 
+  document.getElementById('replayFilm').onclick = () => playFilm();
   /* ---------- hero motion pause ---------- */
   const kbImg = document.querySelector('#hero .bg img'); let paused=false;
   document.getElementById('kbBtn').onclick = e => { paused=!paused; kbImg.style.animationPlayState = paused?'paused':'running';
@@ -1039,7 +1540,8 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
     L[i].t.forEach((t,k) => { const b = document.createElement('button'); b.textContent = t.k; b.onclick = () => pickType(k); ltypes.appendChild(b); });
     pickType(0);
   }
-  function pickType(k){
+  let lk = 0;
+  function pickType(k){ lk = k;
     const r = L[li], t = r.t[k];
     [...ltypes.children].forEach((b,j)=>b.classList.toggle('on',j===k));
     document.getElementById('lRender').src = 'img/room-'+t.p+'.webp';
@@ -1058,12 +1560,161 @@ footer .legal{margin-top:clamp(60px,10vh,100px);font-size:10.5px;line-height:1.7
   document.getElementById('lPlanBox').onclick = () => { document.getElementById('zoomImg').src = document.getElementById('lPlan').src; zoom.classList.add('open'); };
   zoom.onclick = () => zoom.classList.remove('open');
 
+
+  /* ---------- SWIPE: pointer drag / touch / keys ---------- */
+  document.querySelectorAll('#scroller img').forEach(im=>im.draggable=false);
+  const ORDER = ['la-brochure','il-costruttore','la-firma','il-mondo','il-concetto','l-isola','il-valore','il-finale'];
+  function stepPage(dir){
+    const i = ORDER.indexOf(curPage ? curPage.id : 'la-brochure');
+    const n = i + dir; if(n < 0 || n >= ORDER.length) return false;
+    location.hash = ORDER[n]; return true;
+  }
+  function stepLayout(dir){
+    const r = L[li];
+    if(dir > 0){ if(lk < r.t.length-1) pickType(lk+1); else pickRes((li+1) % L.length); }
+    else { if(lk > 0) pickType(lk-1); else { const p = (li-1+L.length) % L.length; pickRes(p); pickType(L[p].t.length-1); } }
+  }
+  function stepMap(dir){
+    const k = mimgs.findIndex(x=>x.classList.contains('on')); const n = (k + dir + mimgs.length) % mimgs.length; mtb[n].click();
+  }
+  const NOSWIPE = 'input,textarea,select,button,a,video,summary,details[open] .ans,.ltabs,.tabs,.thumbs,.scrollx,#menu,#gate,#zoom';
+  let sx=0, sy=0, st=0, dragging=false, target=null, pid=null;
+  const scroller = document.getElementById('scroller');
+  scroller.addEventListener('pointerdown', e => {
+    if(e.button && e.button !== 0) return;
+    if(e.target.closest(NOSWIPE)) return;
+    sx = e.clientX; sy = e.clientY; st = Date.now(); dragging = true; pid = e.pointerId;
+    target = e.target.closest('#lay') ? 'lay' : e.target.closest('#mview') ? 'map' : 'page';
+    cursor.classList.add('down');
+  });
+  addEventListener('pointermove', e => {
+    if(!dragging || e.pointerId !== pid) return;
+    const dx = e.clientX - sx, dy = e.clientY - sy;
+    if(Math.abs(dx) > 12 && Math.abs(dx) > Math.abs(dy)){
+      document.body.classList.add('dragging');
+      if(target === 'page' && curPage){ curPage.classList.add('drag'); curPage.style.transform = `translateX(${dx*0.35}px)`; curPage.style.opacity = 1 - Math.min(Math.abs(dx)/1400, .35); }
+    }
+  });
+  function endDrag(e){
+    if(!dragging || (e && e.pointerId !== pid)) return;
+    dragging = false; cursor.classList.remove('down');
+    const dx = e ? e.clientX - sx : 0, dy = e ? e.clientY - sy : 0, dt = Date.now() - st;
+    const swiped = Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.4 && dt < 1200;
+    if(curPage){ curPage.classList.remove('drag'); curPage.classList.add('snap'); curPage.style.transform=''; curPage.style.opacity=''; setTimeout(()=>curPage && curPage.classList.remove('snap'), 460); }
+    setTimeout(()=>document.body.classList.remove('dragging'), 0);
+    if(!swiped) return;
+    const dir = dx < 0 ? 1 : -1;
+    if(target === 'lay') stepLayout(dir);
+    else if(target === 'map') stepMap(dir);
+    else stepPage(dir);
+    // swallow the click that follows a drag
+    const block = ev => { ev.stopPropagation(); ev.preventDefault(); removeEventListener('click', block, true); };
+    addEventListener('click', block, true); setTimeout(()=>removeEventListener('click', block, true), 50);
+  }
+  addEventListener('pointerup', endDrag);
+  addEventListener('pointercancel', () => { dragging = false; if(curPage){ curPage.classList.remove('drag'); curPage.style.transform=''; curPage.style.opacity=''; } document.body.classList.remove('dragging'); });
+  addEventListener('keydown', e => {
+    if(document.body.classList.contains('locked') || e.target.closest('input,textarea')) return;
+    if(document.getElementById('zoom').classList.contains('open')) return;
+    if(e.key === 'ArrowRight') stepPage(1);
+    if(e.key === 'ArrowLeft') stepPage(-1);
+  });
+
+  /* ---------- custom pointer ---------- */
+  const cursor = document.getElementById('cursor');
+  let cx = -100, cy = -100, tx2 = -100, ty2 = -100;
+  addEventListener('pointermove', e => {
+    if(e.pointerType !== 'mouse') return;
+    tx2 = e.clientX; ty2 = e.clientY; cursor.classList.add('show');
+    const t = e.target;
+    const isLink = t.closest('a,button,summary,input,.plan,.mview,.ltabs,.tabs');
+    const canDrag = !isLink && !document.body.classList.contains('locked') && t.closest('#scroller') && !t.closest('#menu');
+    cursor.classList.toggle('link', !!isLink);
+    cursor.classList.toggle('drag', !!canDrag && !isLink);
+  });
+  document.addEventListener('mouseleave', () => cursor.classList.remove('show'));
+  (function follow(){ cx += (tx2 - cx) * .22; cy += (ty2 - cy) * .22; cursor.style.transform = `translate(${cx}px,${cy}px)` + (cursor.classList.contains('down') ? ' scale(.85)' : ''); requestAnimationFrame(follow); })();
+
+
+  /* ---------- page-top films: play only on the open chapter, sound toggle ---------- */
+  function syncFilms(){
+    document.querySelectorAll('video.ptv').forEach(v => {
+      const onPage = curPage && curPage.contains(v);
+      if(v.hasAttribute('autoplay')){ if(onPage){ const pr=v.play(); pr && pr.catch(()=>{}); } else v.pause(); }
+      else if(!onPage) v.pause();
+    });
+  }
+  document.querySelectorAll('.phone .snd').forEach(b => b.addEventListener('click', e => {
+    e.stopPropagation(); const v = b.parentNode.querySelector('video'); if(!v) return;
+    v.muted = !v.muted; if(!v.muted){ v.currentTime = 0; v.play(); } b.textContent = v.muted ? 'Sound on' : 'Sound off';
+  }));
+  addEventListener('hashchange', () => setTimeout(syncFilms, 80)); setTimeout(syncFilms, 400);
+  document.querySelectorAll('#dots25 i').forEach((d,i) => d.style.transitionDelay = (i*0.05)+'s');
+
+  /* ---------- keep going: past the end of a chapter, carry on to the next ---------- */
+  let push = 0, pushT = 0;
+  function atEnd(){ return scroller.scrollTop + scroller.clientHeight >= scroller.scrollHeight - 4; }
+  function nudge(amount){
+    const nu = curPage && curPage.querySelector('.nextup'); if(!nu) return;
+    push = Math.max(0, push + amount); clearTimeout(pushT); pushT = setTimeout(()=>{ push = 0; bar(); }, 900);
+    bar();
+    if(push >= 260){ push = 0; bar(); location.hash = nu.dataset.next; }
+    function bar(){ const i = nu.querySelector('.bar3 i'); if(i) i.style.transform = `scaleX(${Math.min(push/260,1)})`; }
+  }
+  scroller.addEventListener('wheel', e => { if(e.deltaY > 0 && atEnd()) nudge(Math.min(e.deltaY, 80)); }, {passive:true});
+  let ty0 = 0;
+  scroller.addEventListener('touchstart', e => { ty0 = e.touches[0].clientY; }, {passive:true});
+  scroller.addEventListener('touchmove', e => { const d = ty0 - e.touches[0].clientY; if(d > 0 && atEnd()){ nudge(d*0.6); ty0 = e.touches[0].clientY; } }, {passive:true});
+  addEventListener('keydown', e => { if((e.key==='ArrowDown'||e.key==='PageDown'||e.key===' ') && atEnd() && !e.target.closest('input')) nudge(130); });
+
+
+  /* ---------- film heroes: pause / sound ---------- */
+  document.querySelectorAll('.vhero').forEach(h => {
+    const v = h.querySelector('video'); if(!v) return;
+    const pb = h.querySelector('.vpause'), sb = h.querySelector('.vsnd');
+    pb && pb.addEventListener('click', e => { e.stopPropagation(); if(v.paused){ v.play(); pb.innerHTML='<svg width="12" height="12" viewBox="0 0 14 14"><path d="M4 2v10M10 2v10" stroke="currentColor" stroke-width="1.3"/></svg>'; } else { v.pause(); pb.innerHTML='<svg width="12" height="12" viewBox="0 0 14 14"><path d="M4 2l8 5-8 5z" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>'; } });
+    sb && sb.addEventListener('click', e => { e.stopPropagation(); v.muted = !v.muted; sb.classList.toggle('on', !v.muted); if(!v.muted && v.paused) v.play(); });
+  });
+  /* ---------- word-by-word reveal ---------- */
+  document.querySelectorAll('.wordfill').forEach(p => { p.innerHTML = p.textContent.trim().split(/\s+/).map(w=>'<span class="w">'+w+'</span>').join(' '); });
+  function fillWords(){
+    document.querySelectorAll('.wordfill').forEach(p => {
+      const r = p.getBoundingClientRect(), vh = innerHeight;
+      const prog = Math.min(1, Math.max(0, (vh*0.85 - r.top) / (r.height + vh*0.35)));
+      const ws = p.querySelectorAll('.w'), n = Math.round(prog * ws.length);
+      ws.forEach((w,i)=>w.classList.toggle('on', i < n));
+    });
+  }
+  scroller.addEventListener('scroll', fillWords, {passive:true}); addEventListener('hashchange', ()=>setTimeout(fillWords,100));
+
+
+  /* ---------- sketchbook: drag to scroll, tap to open ---------- */
+  (function(){ const row=document.getElementById('sketchrow'); if(!row) return; let d=false,x0=0,sl=0,mv=false;
+    row.addEventListener('pointerdown',e=>{ if(e.pointerType!=='mouse') return; d=true; mv=false; x0=e.clientX; sl=row.scrollLeft; e.stopPropagation(); });
+    addEventListener('pointermove',e=>{ if(!d) return; const dx=e.clientX-x0; if(Math.abs(dx)>5) mv=true; row.scrollLeft=sl-dx; });
+    addEventListener('pointerup',()=>{ d=false; });
+    row.querySelectorAll('.sk').forEach(b=>b.addEventListener('click',e=>{ if(mv){ e.preventDefault(); return; } document.getElementById('zoomImg').src=b.dataset.src; document.getElementById('zoom').classList.add('open'); }));
+  })();
+
+
+  /* ---------- gentle parallax on the overview photos ---------- */
+  function parallax(){ document.querySelectorAll('.ovimg img').forEach(im => { const r = im.parentNode.getBoundingClientRect(); if(r.bottom < 0 || r.top > innerHeight) return; const c = (r.top + r.height/2 - innerHeight/2) / innerHeight; im.style.setProperty('--py', (-c*40).toFixed(1)+'px'); }); }
+  scroller.addEventListener('scroll', parallax, {passive:true}); addEventListener('hashchange', ()=>setTimeout(parallax,120));
+
   /* ---------- FAQ tabs ---------- */
   document.getElementById('tabs').addEventListener('click', e => {
     const b = e.target.closest('button'); if(!b) return;
     document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('on', x===b));
     document.querySelectorAll('.qa').forEach(q=>q.classList.toggle('on', q.dataset.g===b.dataset.g));
   });
+})();
+</script>
+<script>
+/* reveal safety net: show anything that has entered the screen */
+(function(){ const sc=document.getElementById('scroller'); let t=0;
+  function chk(){ const h=innerHeight; document.querySelectorAll('.page.active .rv:not(.in)').forEach(el=>{ const r=el.getBoundingClientRect(); if(r.top<h*0.95 && r.bottom>0) el.classList.add('in'); }); }
+  sc.addEventListener('scroll',()=>{ cancelAnimationFrame(t); t=requestAnimationFrame(chk); },{passive:true});
+  addEventListener('hashchange',()=>setTimeout(chk,300)); addEventListener('load',()=>setTimeout(chk,300)); setInterval(chk,700);
 })();
 </script>
 </body>
