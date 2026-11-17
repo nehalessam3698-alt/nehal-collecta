@@ -745,6 +745,67 @@ footer .clogo{filter:invert(1) brightness(.25)}
 .ac li{font-size:13px;line-height:1.5;padding:6px 0;color:var(--ink);border-bottom:1px solid rgba(46,44,49,.07)}
 @media (max-width:900px){.acols{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:700px){.a80{height:300vh}.af{width:44%!important}.af figcaption{font-size:12px}}
+
+/* ---- payment plans v2 ---- */
+.psum{text-align:center;font-size:clamp(17px,1.6vw,21px)!important;line-height:1.5;max-width:640px;margin:0 auto 30px}
+.psum b{font-weight:500}
+.pkey{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:30px}
+.pkey div{text-align:center;padding:18px 6px}.pkey div+div{border-left:1px solid var(--line)}
+.pkey b{display:block;font-weight:200;font-size:clamp(26px,3vw,40px);color:var(--ink)}
+.pkey span{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--soft)}
+.pbar{display:flex;height:64px}
+.pbar>div{display:flex;align-items:center;justify-content:center;gap:12px;min-width:0}
+.pbar .pre{background:var(--ink);color:#fff}.pbar .pre b,.pbar .pre span{color:#fff}
+.pbar .ho{background:#8d8792;min-width:6px}
+.pbar .post{border:1px solid var(--ink);background:rgba(255,255,255,.45)}
+.pbar b{font-weight:300;font-size:26px}.pbar span{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase}
+.pbarnote{text-align:right;font-size:11.5px!important;color:var(--soft)!important;margin-top:6px}
+.steps{list-style:none;padding:0;margin:40px 0 0}
+.steps li{display:grid;grid-template-columns:34px 150px 1fr;gap:18px;align-items:start;padding:20px 0;border-bottom:1px solid var(--line)}
+.steps li:first-child{border-top:1px solid var(--line)}
+.steps .sn{width:28px;height:28px;border-radius:50%;border:1px solid var(--ink);display:grid;place-items:center;font-size:12px;margin-top:6px}
+.steps .sp{font-weight:200;font-size:clamp(28px,2.8vw,38px);line-height:1;color:var(--ink)}
+.steps .sp small{display:block;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--soft);margin-top:6px;font-weight:400}
+.steps h6{font-weight:500;font-size:15px;letter-spacing:.02em;margin:4px 0 4px;color:var(--ink)}
+.steps p{margin:0;color:var(--soft)!important;font-size:14px}
+.mdots{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.mdots i{width:9px;height:9px;border-radius:50%;background:var(--ink);display:block}
+.mdots i.big{width:15px;height:15px;margin-top:-3px;background:var(--ink);box-shadow:0 0 0 3px rgba(46,44,49,.15)}
+.mdots i.ho{background:transparent;border:2px solid var(--ink)}
+.mdots.m7{gap:22px}
+.mleg{display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:12px!important;margin-top:10px!important}
+.mleg i{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--ink);margin-right:-8px}
+.mleg i.big{width:13px;height:13px;box-shadow:0 0 0 3px rgba(46,44,49,.15)}
+.mleg i.ho{background:transparent;border:2px solid var(--ink)}
+.ptot{text-align:center;margin-top:30px!important;font-size:14px!important;letter-spacing:.04em}
+.ptot b{font-weight:500}
+.schd{margin:26px auto 0;max-width:760px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.schd summary{cursor:pointer;list-style:none;text-align:center;padding:16px;font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink)}
+.schd summary::-webkit-details-marker{display:none}
+.schd summary::after{content:" +"}.schd[open] summary::after{content:" \2212"}
+.sched{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:18px}
+.sched th{font-weight:400;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft);text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+.sched td{padding:7px 10px;border-bottom:1px solid rgba(46,44,49,.07);color:var(--ink)}
+.sched td:nth-child(3),.sched td:nth-child(4),.sched th:nth-child(3),.sched th:nth-child(4){text-align:right}
+.sched tr.hoz td{background:rgba(46,44,49,.08);font-weight:500}
+.sched tr.poz td{color:var(--soft)}
+@media (max-width:700px){
+ .pkey{grid-template-columns:repeat(3,1fr)}.pkey div{border-bottom:1px solid var(--line)}.pkey div:nth-child(4){border-left:0}
+ .pbar{height:56px}.pbar b{font-size:20px}.pbar span{display:none}
+ .steps li{grid-template-columns:28px 1fr;gap:12px}.steps .sp{grid-column:2}.steps .st{grid-column:2}
+ .mdots{gap:6px}.mdots i{width:8px;height:8px}
+}
+
+.split50{display:flex!important}.split50>div{flex:1}
+#dotsA1{display:flex;justify-content:space-between}#dotsA1 i{width:9px;height:9px}
+#dotsA2 i{width:11px;height:11px}
+.schd{margin-top:46px!important}
+@media (max-width:700px){.plan2 .tl{grid-template-columns:repeat(3,1fr)!important;row-gap:22px}.split50{flex-direction:column}#dotsA1,#dotsA2,#dots25{display:grid!important;grid-template-columns:repeat(16,1fr);gap:10px 0;justify-items:center}#dotsA1 i,#dotsA2 i{width:7px;height:7px}}
+
+.fees{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin:-14px auto 34px;padding:14px 22px;border:1px solid var(--line);background:rgba(255,255,255,.4);max-width:640px}
+.fees span{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--soft)}
+.fees b{font-weight:400;font-size:16px;color:var(--ink)}
+.fees i{font-style:normal;color:var(--soft)}
 </style>
 </head>
 <body class="locked">
@@ -1342,45 +1403,30 @@ footer .clogo{filter:invert(1) brightness(.25)}
   <div class="plan2">
     <div class="ttl rv">The freedom to<br>live beautifully.</div>
     <p class="pp rv">Payment plans</p>
-    <div class="tabs pptabs rv" id="ptabs"><button class="on" data-p="0">Plan 1 · 50 / 50</button><button data-p="1">Plan 2 · 1% monthly</button><button data-p="2">Higher down payment</button></div>
+    <div class="tabs pptabs rv" id="ptabs"><button class="on" data-p="a">Option A · PDC</button><button data-p="b">Option B · Non-PDC</button></div>
     <p class="acd rv">Anticipated handover 31 October 2030 · 48 months from booking</p>
-
-    <div class="pplan on" data-p="0">
+    <div class="fees rv"><span>In addition to the price</span><b>4% DLD fee</b><i>+</i><b>AED 4,200 Oqood fees</b></div>
+    <div class="pplan on" data-p="a">
+    <div class="keyrow"><div><b>5%</b><span>Down payment</span></div><div><b>27%</b><span>Year 1</span></div><div><b>67%</b><span>Pre-handover</span></div><div><b>1%</b><span>On handover</span></div><div><b>32%</b><span>Post-handover</span></div></div>
+    <div class="split50 rv"><div style="flex:68"><b>68%</b><span>Pre-handover</span></div><div style="flex:32"><b>32%</b><span>Post-handover</span></div></div>
+    <h5 class="rv">Before handover</h5>
+    <div class="tl" style="grid-template-columns:repeat(4,1fr)"><div><b>5%</b><i></i><span>Down<br>payment</span></div><div><b>5%</b><i></i><span>3rd<br>month</span></div><div><b>5%</b><i></i><span>12th<br>month</span></div><div><b>5%</b><i></i><span>18th<br>month</span></div></div>
+    <div class="after rv"><span class="num">1%</span><span class="x">× 48 months · every month from month 1 to handover</span></div>
+    <div class="dots rv" id="dotsA1"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <h5 class="rv" style="margin-top:46px">After handover</h5>
+    <div class="after rv"><span class="num">1%</span><span class="x">× 32 months · months 49 to 80</span></div>
+    <div class="dots rv" id="dotsA2"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <details class="schd"><summary>Month-by-month schedule</summary><table class="sched"><thead><tr><th>Month</th><th>Payment for</th><th>Pay</th><th>Paid so far</th></tr></thead><tbody><tr><td>Booking</td><td>Down payment on booking (5%)</td><td>5%</td><td>5%</td></tr><tr><td>1</td><td>Monthly 1%</td><td>1%</td><td>6%</td></tr><tr><td>2</td><td>Monthly 1%</td><td>1%</td><td>7%</td></tr><tr><td>3</td><td>Monthly 1%</td><td>1%</td><td>8%</td></tr><tr><td>3</td><td>5% milestone</td><td>5%</td><td>13%</td></tr><tr><td>4</td><td>Monthly 1%</td><td>1%</td><td>14%</td></tr><tr><td>5</td><td>Monthly 1%</td><td>1%</td><td>15%</td></tr><tr><td>6</td><td>Monthly 1%</td><td>1%</td><td>16%</td></tr><tr><td>7</td><td>Monthly 1%</td><td>1%</td><td>17%</td></tr><tr><td>8</td><td>Monthly 1%</td><td>1%</td><td>18%</td></tr><tr><td>9</td><td>Monthly 1%</td><td>1%</td><td>19%</td></tr><tr><td>10</td><td>Monthly 1%</td><td>1%</td><td>20%</td></tr><tr><td>11</td><td>Monthly 1%</td><td>1%</td><td>21%</td></tr><tr><td>12</td><td>Monthly 1%</td><td>1%</td><td>22%</td></tr><tr><td>12</td><td>5% milestone</td><td>5%</td><td>27%</td></tr><tr><td>13</td><td>Monthly 1%</td><td>1%</td><td>28%</td></tr><tr><td>14</td><td>Monthly 1%</td><td>1%</td><td>29%</td></tr><tr><td>15</td><td>Monthly 1%</td><td>1%</td><td>30%</td></tr><tr><td>16</td><td>Monthly 1%</td><td>1%</td><td>31%</td></tr><tr><td>17</td><td>Monthly 1%</td><td>1%</td><td>32%</td></tr><tr><td>18</td><td>Monthly 1%</td><td>1%</td><td>33%</td></tr><tr><td>18</td><td>5% milestone</td><td>5%</td><td>38%</td></tr><tr><td>19</td><td>Monthly 1%</td><td>1%</td><td>39%</td></tr><tr><td>20</td><td>Monthly 1%</td><td>1%</td><td>40%</td></tr><tr><td>21</td><td>Monthly 1%</td><td>1%</td><td>41%</td></tr><tr><td>22</td><td>Monthly 1%</td><td>1%</td><td>42%</td></tr><tr><td>23</td><td>Monthly 1%</td><td>1%</td><td>43%</td></tr><tr><td>24</td><td>Monthly 1%</td><td>1%</td><td>44%</td></tr><tr><td>25</td><td>Monthly 1%</td><td>1%</td><td>45%</td></tr><tr><td>26</td><td>Monthly 1%</td><td>1%</td><td>46%</td></tr><tr><td>27</td><td>Monthly 1%</td><td>1%</td><td>47%</td></tr><tr><td>28</td><td>Monthly 1%</td><td>1%</td><td>48%</td></tr><tr><td>29</td><td>Monthly 1%</td><td>1%</td><td>49%</td></tr><tr><td>30</td><td>Monthly 1%</td><td>1%</td><td>50%</td></tr><tr><td>31</td><td>Monthly 1%</td><td>1%</td><td>51%</td></tr><tr><td>32</td><td>Monthly 1%</td><td>1%</td><td>52%</td></tr><tr><td>33</td><td>Monthly 1%</td><td>1%</td><td>53%</td></tr><tr><td>34</td><td>Monthly 1%</td><td>1%</td><td>54%</td></tr><tr><td>35</td><td>Monthly 1%</td><td>1%</td><td>55%</td></tr><tr><td>36</td><td>Monthly 1%</td><td>1%</td><td>56%</td></tr><tr><td>37</td><td>Monthly 1%</td><td>1%</td><td>57%</td></tr><tr><td>38</td><td>Monthly 1%</td><td>1%</td><td>58%</td></tr><tr><td>39</td><td>Monthly 1%</td><td>1%</td><td>59%</td></tr><tr><td>40</td><td>Monthly 1%</td><td>1%</td><td>60%</td></tr><tr><td>41</td><td>Monthly 1%</td><td>1%</td><td>61%</td></tr><tr><td>42</td><td>Monthly 1%</td><td>1%</td><td>62%</td></tr><tr><td>43</td><td>Monthly 1%</td><td>1%</td><td>63%</td></tr><tr><td>44</td><td>Monthly 1%</td><td>1%</td><td>64%</td></tr><tr><td>45</td><td>Monthly 1%</td><td>1%</td><td>65%</td></tr><tr><td>46</td><td>Monthly 1%</td><td>1%</td><td>66%</td></tr><tr><td>47</td><td>Monthly 1%</td><td>1%</td><td>67%</td></tr><tr class="hoz"><td>48</td><td>Monthly 1% · handover</td><td>1%</td><td>68%</td></tr><tr class="poz"><td>49</td><td>Monthly 1%</td><td>1%</td><td>69%</td></tr><tr class="poz"><td>50</td><td>Monthly 1%</td><td>1%</td><td>70%</td></tr><tr class="poz"><td>51</td><td>Monthly 1%</td><td>1%</td><td>71%</td></tr><tr class="poz"><td>52</td><td>Monthly 1%</td><td>1%</td><td>72%</td></tr><tr class="poz"><td>53</td><td>Monthly 1%</td><td>1%</td><td>73%</td></tr><tr class="poz"><td>54</td><td>Monthly 1%</td><td>1%</td><td>74%</td></tr><tr class="poz"><td>55</td><td>Monthly 1%</td><td>1%</td><td>75%</td></tr><tr class="poz"><td>56</td><td>Monthly 1%</td><td>1%</td><td>76%</td></tr><tr class="poz"><td>57</td><td>Monthly 1%</td><td>1%</td><td>77%</td></tr><tr class="poz"><td>58</td><td>Monthly 1%</td><td>1%</td><td>78%</td></tr><tr class="poz"><td>59</td><td>Monthly 1%</td><td>1%</td><td>79%</td></tr><tr class="poz"><td>60</td><td>Monthly 1%</td><td>1%</td><td>80%</td></tr><tr class="poz"><td>61</td><td>Monthly 1%</td><td>1%</td><td>81%</td></tr><tr class="poz"><td>62</td><td>Monthly 1%</td><td>1%</td><td>82%</td></tr><tr class="poz"><td>63</td><td>Monthly 1%</td><td>1%</td><td>83%</td></tr><tr class="poz"><td>64</td><td>Monthly 1%</td><td>1%</td><td>84%</td></tr><tr class="poz"><td>65</td><td>Monthly 1%</td><td>1%</td><td>85%</td></tr><tr class="poz"><td>66</td><td>Monthly 1%</td><td>1%</td><td>86%</td></tr><tr class="poz"><td>67</td><td>Monthly 1%</td><td>1%</td><td>87%</td></tr><tr class="poz"><td>68</td><td>Monthly 1%</td><td>1%</td><td>88%</td></tr><tr class="poz"><td>69</td><td>Monthly 1%</td><td>1%</td><td>89%</td></tr><tr class="poz"><td>70</td><td>Monthly 1%</td><td>1%</td><td>90%</td></tr><tr class="poz"><td>71</td><td>Monthly 1%</td><td>1%</td><td>91%</td></tr><tr class="poz"><td>72</td><td>Monthly 1%</td><td>1%</td><td>92%</td></tr><tr class="poz"><td>73</td><td>Monthly 1%</td><td>1%</td><td>93%</td></tr><tr class="poz"><td>74</td><td>Monthly 1%</td><td>1%</td><td>94%</td></tr><tr class="poz"><td>75</td><td>Monthly 1%</td><td>1%</td><td>95%</td></tr><tr class="poz"><td>76</td><td>Monthly 1%</td><td>1%</td><td>96%</td></tr><tr class="poz"><td>77</td><td>Monthly 1%</td><td>1%</td><td>97%</td></tr><tr class="poz"><td>78</td><td>Monthly 1%</td><td>1%</td><td>98%</td></tr><tr class="poz"><td>79</td><td>Monthly 1%</td><td>1%</td><td>99%</td></tr><tr class="poz"><td>80</td><td>Monthly 1%</td><td>1%</td><td>100%</td></tr></tbody></table></details>
+    </div>
+    <div class="pplan" data-p="b">
     <div class="keyrow"><div><b>15%</b><span>Down payment</span></div><div><b>25%</b><span>Year 1</span></div><div><b>50%</b><span>Pre-handover</span></div><div><b>0%</b><span>On handover</span></div><div><b>50%</b><span>Post-handover</span></div></div>
     <div class="split50 rv"><div><b>50%</b><span>Pre-handover</span></div><div><b>50%</b><span>Post-handover</span></div></div>
     <h5 class="rv">Before handover</h5>
-    <div class="tl rv">
-      <div><b>10%</b><i></i><span>Down<br>payment</span></div>
-      <div><b>5%</b><i></i><span>2nd<br>month</span></div><div><b>5%</b><i></i><span>6th<br>month</span></div><div><b>5%</b><i></i><span>12th<br>month</span></div>
-      <div><b>5%</b><i></i><span>18th<br>month</span></div><div><b>5%</b><i></i><span>24th<br>month</span></div><div><b>5%</b><i></i><span>30th<br>month</span></div>
-      <div><b>5%</b><i></i><span>36th<br>month</span></div><div><b>5%</b><i></i><span>42nd<br>month</span></div>
-    </div>
+    <div class="tl" style="grid-template-columns:repeat(9,1fr)"><div><b>10%</b><i></i><span>Down<br>payment</span></div><div><b>5%</b><i></i><span>2nd<br>month</span></div><div><b>5%</b><i></i><span>6th<br>month</span></div><div><b>5%</b><i></i><span>12th<br>month</span></div><div><b>5%</b><i></i><span>18th<br>month</span></div><div><b>5%</b><i></i><span>24th<br>month</span></div><div><b>5%</b><i></i><span>30th<br>month</span></div><div><b>5%</b><i></i><span>36th<br>month</span></div><div><b>5%</b><i></i><span>42nd<br>month</span></div></div>
     <h5 class="rv">After handover</h5>
     <div class="after rv"><span class="num">2%</span><span class="x">× 25 months</span></div>
     <div class="dots rv" id="dots25"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-    <p class="pnote">Down payment of 15%: 10% on booking and 5% in the second month. Then 5% every six months until handover, and 2% a month for 25 months after it.</p>
-    </div>
-
-    <div class="pplan" data-p="1">
-    <div class="keyrow"><div><b>5%</b><span>Down payment</span></div><div><b>27%</b><span>Year 1</span></div><div><b>67%</b><span>Pre-handover</span></div><div><b>1%</b><span>On handover</span></div><div><b>32%</b><span>Post-handover</span></div></div>
-    <div class="split50 split3"><div style="flex:68"><b>68%</b><span>Up to and on handover</span></div><div style="flex:32"><b>32%</b><span>Post-handover</span></div></div>
-    <h5>Milestones</h5>
-    <div class="tl tl4"><div><b>5%</b><i></i><span>Down<br>payment</span></div><div><b>5%</b><i></i><span>3rd<br>month</span></div><div><b>5%</b><i></i><span>12th<br>month</span></div><div><b>5%</b><i></i><span>18th<br>month</span></div></div>
-    <h5>Every month</h5>
-    <div class="after"><span class="num">1%</span><span class="x">× 80 months, from month 1</span></div>
-    <div class="dots d80"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="ho"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i></div>
-    <div class="dlegend"><span><i></i>Before handover · months 1–47</span><span><i class="ho"></i>Handover · month 48</span><span><i class="po"></i>After handover · months 49–80</span></div>
-    <p class="pnote">5% on booking, 5% in months 3, 12 and 18, and 1% every month for 80 months starting in month 1, by post-dated cheque. The last instalment falls in month 80.</p>
-    </div>
-
-    <div class="pplan" data-p="2">
-    <p class="pintro">For Plan 1, a larger down payment earns a discount on the price.</p>
-    <div class="dpgrid">
-      <div class="dpc"><span class="k">Standard</span><b>15%</b><span class="l">Down payment</span><em>Plan 1 as shown</em></div>
-      <div class="dpc"><span class="k">Option 1</span><b>35%</b><span class="l">Down payment</span><em>20% more on booking</em><strong>5% discount</strong></div>
-      <div class="dpc"><span class="k">Option 2</span><b>100%</b><span class="l">Paid in full</span><em>85% more on booking</em><strong>15% discount</strong></div>
-    </div>
-    <p class="pnote">Higher down payment discounts apply to Plan 1 (50 / 50) only.</p>
+    <details class="schd"><summary>Month-by-month schedule</summary><table class="sched"><thead><tr><th>Month</th><th>Payment for</th><th>Pay</th><th>Paid so far</th></tr></thead><tbody><tr><td>Booking</td><td>Down payment – immediate (10%)</td><td>10%</td><td>10%</td></tr><tr><td>2</td><td>Down payment – balance (5%)</td><td>5%</td><td>15%</td></tr><tr><td>6</td><td>Installment 01</td><td>5%</td><td>20%</td></tr><tr><td>12</td><td>Installment 02</td><td>5%</td><td>25%</td></tr><tr><td>18</td><td>Installment 03</td><td>5%</td><td>30%</td></tr><tr><td>24</td><td>Installment 04</td><td>5%</td><td>35%</td></tr><tr><td>30</td><td>Installment 05</td><td>5%</td><td>40%</td></tr><tr><td>36</td><td>Installment 06</td><td>5%</td><td>45%</td></tr><tr><td>42</td><td>Installment 07</td><td>5%</td><td>50%</td></tr><tr class="poz"><td>49</td><td>Installment 08</td><td>2%</td><td>52%</td></tr><tr class="poz"><td>50</td><td>Installment 09</td><td>2%</td><td>54%</td></tr><tr class="poz"><td>51</td><td>Installment 10</td><td>2%</td><td>56%</td></tr><tr class="poz"><td>52</td><td>Installment 11</td><td>2%</td><td>58%</td></tr><tr class="poz"><td>53</td><td>Installment 12</td><td>2%</td><td>60%</td></tr><tr class="poz"><td>54</td><td>Installment 13</td><td>2%</td><td>62%</td></tr><tr class="poz"><td>55</td><td>Installment 14</td><td>2%</td><td>64%</td></tr><tr class="poz"><td>56</td><td>Installment 15</td><td>2%</td><td>66%</td></tr><tr class="poz"><td>57</td><td>Installment 16</td><td>2%</td><td>68%</td></tr><tr class="poz"><td>58</td><td>Installment 17</td><td>2%</td><td>70%</td></tr><tr class="poz"><td>59</td><td>Installment 18</td><td>2%</td><td>72%</td></tr><tr class="poz"><td>60</td><td>Installment 19</td><td>2%</td><td>74%</td></tr><tr class="poz"><td>61</td><td>Installment 20</td><td>2%</td><td>76%</td></tr><tr class="poz"><td>62</td><td>Installment 21</td><td>2%</td><td>78%</td></tr><tr class="poz"><td>63</td><td>Installment 22</td><td>2%</td><td>80%</td></tr><tr class="poz"><td>64</td><td>Installment 23</td><td>2%</td><td>82%</td></tr><tr class="poz"><td>65</td><td>Installment 24</td><td>2%</td><td>84%</td></tr><tr class="poz"><td>66</td><td>Installment 25</td><td>2%</td><td>86%</td></tr><tr class="poz"><td>67</td><td>Installment 26</td><td>2%</td><td>88%</td></tr><tr class="poz"><td>68</td><td>Installment 27</td><td>2%</td><td>90%</td></tr><tr class="poz"><td>69</td><td>Installment 28</td><td>2%</td><td>92%</td></tr><tr class="poz"><td>70</td><td>Installment 29</td><td>2%</td><td>94%</td></tr><tr class="poz"><td>71</td><td>Installment 30</td><td>2%</td><td>96%</td></tr><tr class="poz"><td>72</td><td>Installment 31</td><td>2%</td><td>98%</td></tr><tr class="poz"><td>73</td><td>Installment 32</td><td>2%</td><td>100%</td></tr></tbody></table></details>
     </div>
   </div>
 </section>
@@ -1763,7 +1809,7 @@ footer .clogo{filter:invert(1) brightness(.25)}
     v.muted = !v.muted; if(!v.muted){ v.currentTime = 0; v.play(); } b.textContent = v.muted ? 'Sound on' : 'Sound off';
   }));
   addEventListener('hashchange', () => setTimeout(syncFilms, 80)); setTimeout(syncFilms, 400);
-  document.querySelectorAll('#dots25 i').forEach((d,i) => d.style.transitionDelay = (i*0.05)+'s');
+  document.querySelectorAll('#dots25,#dotsA1,#dotsA2').forEach(g=>g.querySelectorAll('i').forEach((d,i) => d.style.transitionDelay = (i*0.03)+'s'));
 
   /* ---------- keep going: past the end of a chapter, carry on to the next ---------- */
   let push = 0, pushT = 0;
