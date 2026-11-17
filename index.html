@@ -687,6 +687,64 @@ footer .clogo{filter:invert(1) brightness(.25)}
 .dfm{position:relative;margin-top:clamp(30px,5vh,50px);aspect-ratio:16/9;overflow:hidden;background:#111}
 .dfm video{width:100%;height:100%;object-fit:cover;display:block}
 .dfm .dsnd{position:absolute;right:20px;bottom:20px;border:1px solid rgba(255,255,255,.8);color:#fff;background:rgba(0,0,0,.18);border-radius:30px;padding:9px 18px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(6px)}
+
+/* ---- payment plans ---- */
+.pptabs{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:6px 0 14px}
+.acd{text-align:center;font-size:12px!important;letter-spacing:.18em;text-transform:uppercase;color:var(--soft)!important;margin-bottom:34px}
+.pplan{display:none}.pplan.on{display:block;animation:pfade .6s ease both}
+@keyframes pfade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.keyrow{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:34px}
+.keyrow div{text-align:center;padding:18px 6px}
+.keyrow div+div{border-left:1px solid var(--line)}
+.keyrow b{display:block;font-weight:200;font-size:clamp(24px,2.8vw,36px);color:var(--ink)}
+.keyrow span{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--soft)}
+.split3{display:flex!important}
+.split3 div{min-width:0}
+.split3 div:first-child{min-width:0}
+.split3 div:last-child{border:1px solid var(--line)}
+.tl4{grid-template-columns:repeat(4,1fr)!important}
+.d80{display:grid!important;grid-template-columns:repeat(40,1fr);gap:10px 0;justify-items:center}
+.d80 i{width:8px!important;height:8px!important}
+.d80 i.ho{background:var(--ink)!important;transform:scale(1.4)}
+.d80 i.po{background:transparent!important;border:1px solid var(--ink)}
+.dots i{background:var(--ink)!important}
+.dlegend{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-top:16px;font-size:11px;color:var(--soft)}
+.dlegend i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ink);margin-right:7px;vertical-align:middle}
+.dlegend i.po{background:transparent;border:1px solid var(--ink)}
+.pnote{text-align:center;font-size:13px!important;color:var(--soft)!important;max-width:620px;margin:34px auto 0}
+.pintro{text-align:center;margin-bottom:28px}
+.dpgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.dpc{border:1px solid var(--line);background:rgba(255,255,255,.4);padding:30px 20px;text-align:center;display:flex;flex-direction:column;gap:6px}
+.dpc .k{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--soft)}
+.dpc b{font-weight:200;font-size:clamp(40px,4.6vw,62px);color:var(--ink);line-height:1.1}
+.dpc .l{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink)}
+.dpc em{font-style:normal;font-size:13px;color:var(--soft)}
+.dpc strong{margin-top:10px;align-self:center;font-weight:400;font-size:12px;letter-spacing:.2em;text-transform:uppercase;background:var(--ink);color:#fff;padding:9px 16px}
+@media (max-width:700px){.keyrow{grid-template-columns:repeat(3,1fr)}.keyrow div:nth-child(4){border-left:0}.keyrow div{border-bottom:1px solid var(--line)}.d80{grid-template-columns:repeat(20,1fr)}.dpgrid{grid-template-columns:1fr}.split3{flex-direction:column}}
+/* ---- 80+ amenities ---- */
+#amen80{padding-top:clamp(40px,8vh,90px)}
+.a80{position:relative;height:370vh}
+.a80stick{position:sticky;top:0;height:100vh;display:grid;place-items:center;pointer-events:none}
+.a80c{text-align:center;padding-top:60px}
+.a80c .n{font-weight:200;font-size:clamp(130px,19vw,300px);line-height:.9;letter-spacing:-.02em;color:var(--ink)}
+.a80c .t{font-size:clamp(22px,2.4vw,34px)!important;font-style:italic;font-weight:300;color:var(--ink)!important;margin-top:6px}
+.a80c .s{font-size:13px!important;color:var(--soft)!important;max-width:300px;margin:12px auto 0}
+.af{position:absolute;margin:0;z-index:2;will-change:transform}
+.af img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;box-shadow:0 30px 60px -30px rgba(40,30,60,.45)}
+.af figcaption{font-size:14px;color:var(--ink);margin-top:10px;letter-spacing:.02em}
+.a80list{padding-top:clamp(40px,8vh,90px)}
+.a80head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:40px}
+.a80head h2{font-size:clamp(40px,5.4vw,78px)!important;text-transform:none!important;font-weight:200!important;letter-spacing:-.01em}
+.a80head h2 em{font-weight:300}
+.a80head p{max-width:360px;color:var(--soft)!important}
+.acols{display:grid;grid-template-columns:repeat(4,1fr);gap:40px 28px}
+.ac{border-top:1px solid var(--line);padding-top:16px}
+.ac .it{margin-bottom:2px!important}
+.ac .en{font-style:italic;font-size:15px!important;margin-bottom:12px}
+.ac ul{list-style:none;padding:0;margin:0}
+.ac li{font-size:13px;line-height:1.5;padding:6px 0;color:var(--ink);border-bottom:1px solid rgba(46,44,49,.07)}
+@media (max-width:900px){.acols{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:700px){.a80{height:300vh}.af{width:44%!important}.af figcaption{font-size:12px}}
 </style>
 </head>
 <body class="locked">
@@ -1204,6 +1262,18 @@ footer .clogo{filter:invert(1) brightness(.25)}
 </section>
 
 <!-- LAYOUTS & FLOOR PLANS -->
+<!-- 80+ AMENITIES -->
+<section id="amen80">
+  <div class="a80">
+    <div class="a80stick"><div class="a80c"><div class="n">80+</div><p class="t">Amenities</p><p class="s">The same impeccable standard Maserati has held since 1914.</p></div></div>
+    <figure class="af" data-sp="-60" style="top:4%;left:4%;width:30%"><img src="img/lv-018-016.webp" alt="" loading="lazy"><figcaption>The Arrival &amp; Welcome Centre</figcaption></figure><figure class="af" data-sp="40" style="top:10%;right:4%;width:26%"><img src="img/lv-026-031.webp" alt="" loading="lazy"><figcaption>Podcast studio</figcaption></figure><figure class="af" data-sp="30" style="top:24%;left:4%;width:24%"><img src="img/lv-023-023.webp" alt="" loading="lazy"><figcaption>Kids’ play area</figcaption></figure><figure class="af" data-sp="-40" style="top:30%;right:4%;width:30%"><img src="img/lv-020-020.webp" alt="" loading="lazy"><figcaption>The pools</figcaption></figure><figure class="af" data-sp="50" style="top:47%;right:4%;width:28%"><img src="img/lv-022-022.webp" alt="" loading="lazy"><figcaption>Floating restaurant</figcaption></figure><figure class="af" data-sp="-30" style="top:52%;left:4%;width:30%"><img src="img/lv-025-028.webp" alt="" loading="lazy"><figcaption>Sports club</figcaption></figure><figure class="af" data-sp="40" style="top:70%;left:4%;width:24%"><img src="img/lv-015-014.webp" alt="" loading="lazy"><figcaption>Beach club</figcaption></figure><figure class="af" data-sp="-50" style="top:74%;right:4%;width:26%"><img src="img/lv-024-024.webp" alt="" loading="lazy"><figcaption>Spa</figcaption></figure><figure class="af" data-sp="30" style="top:86%;left:22%;width:28%"><img src="promenade.webp" alt="" loading="lazy"><figcaption>La Passeggiata, the promenade</figcaption></figure>
+  </div>
+  <div class="wrap a80list">
+    <div class="a80head"><h2 class="rv">80+ <em>amenities.</em></h2><p class="rv d1">Eight ways to spend a day on the island, from the moment you arrive to the evening by the sea.</p></div>
+    <div class="acols"><div class="ac rv"><p class="it">Il Benvenuto</p><p class="en">The Welcome</p><ul><li>25N, the welcome centre</li><li>Il Tridente, the arrival marina</li><li>La Fontana del Nettuno</li><li>La Piazza del Nettuno</li><li>Il Faro, the beacon</li></ul></div><div class="ac rv"><p class="it">La Spiaggia</p><p class="en">The Beach</p><ul><li>Cala, the beach club</li><li>Onda, the beach lounge</li><li>Le Piscine, the pools</li><li>Four beaches and a lagoon</li></ul></div><div class="ac rv"><p class="it">Il Tavolo</p><p class="en">The Table</p><ul><li>Àncora, the floating restaurant</li><li>Sei Venti, casual dining</li><li>Tramontana, the beach bar</li><li>Orizzonte, the pool bar</li><li>Zefiro, the juice bar</li><li>Orto, the edible garden</li></ul></div><div class="ac rv"><p class="it">La Famiglia</p><p class="en">The Family</p><ul><li>Il Cavalluccio, the family club</li><li>Giro Girotondo, the playground</li><li>Le Ondine, the kids’ pool</li></ul></div><div class="ac rv"><p class="it">La Tranquillità</p><p class="en">The Tranquillity</p><ul><li>Il Giardino, the gardens</li><li>Il Respiro, the yoga garden</li><li>La Passeggiata, the promenades</li><li>Il Boschetto, the hammock groves</li><li>Il Prato, the picnic lawn</li></ul></div><div class="ac rv"><p class="it">La Vitalità</p><p class="en">The Vitality</p><ul><li>Folgore, the sports club</li><li>Mille Miglia, the running route</li><li>Miramare, the water sports club</li><li>Andante, the spa</li></ul></div><div class="ac rv"><p class="it">L’Attività</p><p class="en">The Activity</p><ul><li>1914, the residents’ lounge</li><li>L’Officina, co-working</li><li>La Voce, the podcast studio</li><li>Aria, the amphitheatre</li></ul></div><div class="ac rv"><p class="it">La Chiave</p><p class="en">The Key</p><ul><li>Maserati Island Owners Club UAE</li><li>Scenic drives and getaways</li><li>Social events and VIP passes</li><li>Island market, clinic and pharmacy</li></ul></div></div>
+  </div>
+</section>
+
 <section id="layouts">
   <div class="wrap">
     <div class="center"><span class="dash rv"></span><h2 class="rv">Layouts &amp; floor plans</h2>
@@ -1271,7 +1341,12 @@ footer .clogo{filter:invert(1) brightness(.25)}
 <section id="payment">
   <div class="plan2">
     <div class="ttl rv">The freedom to<br>live beautifully.</div>
-    <p class="pp rv">Payment plan</p>
+    <p class="pp rv">Payment plans</p>
+    <div class="tabs pptabs rv" id="ptabs"><button class="on" data-p="0">Plan 1 · 50 / 50</button><button data-p="1">Plan 2 · 1% monthly</button><button data-p="2">Higher down payment</button></div>
+    <p class="acd rv">Anticipated handover 31 October 2030 · 48 months from booking</p>
+
+    <div class="pplan on" data-p="0">
+    <div class="keyrow"><div><b>15%</b><span>Down payment</span></div><div><b>25%</b><span>Year 1</span></div><div><b>50%</b><span>Pre-handover</span></div><div><b>0%</b><span>On handover</span></div><div><b>50%</b><span>Post-handover</span></div></div>
     <div class="split50 rv"><div><b>50%</b><span>Pre-handover</span></div><div><b>50%</b><span>Post-handover</span></div></div>
     <h5 class="rv">Before handover</h5>
     <div class="tl rv">
@@ -1283,6 +1358,30 @@ footer .clogo{filter:invert(1) brightness(.25)}
     <h5 class="rv">After handover</h5>
     <div class="after rv"><span class="num">2%</span><span class="x">× 25 months</span></div>
     <div class="dots rv" id="dots25"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <p class="pnote">Down payment of 15%: 10% on booking and 5% in the second month. Then 5% every six months until handover, and 2% a month for 25 months after it.</p>
+    </div>
+
+    <div class="pplan" data-p="1">
+    <div class="keyrow"><div><b>5%</b><span>Down payment</span></div><div><b>27%</b><span>Year 1</span></div><div><b>67%</b><span>Pre-handover</span></div><div><b>1%</b><span>On handover</span></div><div><b>32%</b><span>Post-handover</span></div></div>
+    <div class="split50 split3"><div style="flex:68"><b>68%</b><span>Up to and on handover</span></div><div style="flex:32"><b>32%</b><span>Post-handover</span></div></div>
+    <h5>Milestones</h5>
+    <div class="tl tl4"><div><b>5%</b><i></i><span>Down<br>payment</span></div><div><b>5%</b><i></i><span>3rd<br>month</span></div><div><b>5%</b><i></i><span>12th<br>month</span></div><div><b>5%</b><i></i><span>18th<br>month</span></div></div>
+    <h5>Every month</h5>
+    <div class="after"><span class="num">1%</span><span class="x">× 80 months, from month 1</span></div>
+    <div class="dots d80"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="ho"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i><i class="po"></i></div>
+    <div class="dlegend"><span><i></i>Before handover · months 1–47</span><span><i class="ho"></i>Handover · month 48</span><span><i class="po"></i>After handover · months 49–80</span></div>
+    <p class="pnote">5% on booking, 5% in months 3, 12 and 18, and 1% every month for 80 months starting in month 1, by post-dated cheque. The last instalment falls in month 80.</p>
+    </div>
+
+    <div class="pplan" data-p="2">
+    <p class="pintro">For Plan 1, a larger down payment earns a discount on the price.</p>
+    <div class="dpgrid">
+      <div class="dpc"><span class="k">Standard</span><b>15%</b><span class="l">Down payment</span><em>Plan 1 as shown</em></div>
+      <div class="dpc"><span class="k">Option 1</span><b>35%</b><span class="l">Down payment</span><em>20% more on booking</em><strong>5% discount</strong></div>
+      <div class="dpc"><span class="k">Option 2</span><b>100%</b><span class="l">Paid in full</span><em>85% more on booking</em><strong>15% discount</strong></div>
+    </div>
+    <p class="pnote">Higher down payment discounts apply to Plan 1 (50 / 50) only.</p>
+    </div>
   </div>
 </section>
 
@@ -1738,6 +1837,19 @@ footer .clogo{filter:invert(1) brightness(.25)}
   const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const p=v.play(); p&&p.catch(()=>{}); } else v.pause(); }),{threshold:.35});
   io.observe(v);
   b.onclick=()=>{ v.muted=!v.muted; b.textContent=v.muted?'Sound on':'Sound off'; if(!v.muted&&v.paused) v.play(); };
+})();
+</script>
+<script>
+/* payment plan tabs */
+(function(){ const bs=[...document.querySelectorAll('#ptabs button')], ps=[...document.querySelectorAll('.pplan')];
+  bs.forEach(b=>b.onclick=()=>{ bs.forEach(x=>x.classList.toggle('on',x===b)); ps.forEach(p=>p.classList.toggle('on',p.dataset.p===b.dataset.p)); ps.forEach(p=>p.querySelectorAll('.dots').forEach(d=>{d.classList.remove('in'); void d.offsetWidth; d.classList.add('in');})); });
+  document.querySelectorAll('.d80 i').forEach((d,i)=>d.style.transitionDelay=(i*0.012)+'s');
+})();
+/* 80+ amenities: pictures drift past the number at their own speed */
+(function(){ const sc=document.getElementById('scroller'), box=document.querySelector('.a80'); if(!box) return; const fs=[...box.querySelectorAll('.af')];
+  function f(){ const r=box.getBoundingClientRect(); if(r.bottom<0||r.top>innerHeight) return; const prog=(innerHeight-r.top)/(r.height+innerHeight);
+    fs.forEach(el=>{ el.style.transform='translateY('+((prog-.5)*parseFloat(el.dataset.sp)*6).toFixed(1)+'px)'; }); }
+  sc.addEventListener('scroll',()=>requestAnimationFrame(f),{passive:true}); addEventListener('hashchange',()=>setTimeout(f,200)); f();
 })();
 </script>
 </body>
